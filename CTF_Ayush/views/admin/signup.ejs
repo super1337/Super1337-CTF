@@ -43,7 +43,7 @@
                   <div class="form-group">
                     <label for="cnfPassword" class="col-lg-2 control-label" >Confirm</label>
                     <div class="col-lg-10">
-                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password">
+                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password" name="passconf">
                       <!--<div class="checkbox">
                         <label>
                           <input type="checkbox"> Checkbox
@@ -80,6 +80,9 @@
                       <button type="reset" class="btn btn-default">Reset</button>&emsp;&emsp;&emsp;&emsp;
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
                   </div>
                 </fieldset>
               </form>

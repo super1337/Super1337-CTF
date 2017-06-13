@@ -12,6 +12,17 @@
         "createdAt": "2017-06-13T14:45:01.310Z",
         "updatedAt": "2017-06-13T14:45:01.310Z",
         "id": 1
+      },
+      {
+        "name": "aaa",
+        "username": "aaa",
+        "email": "aaa@aaa.com",
+        "password": "aaa",
+        "sex": "option1",
+        "level": "Novice",
+        "createdAt": "2017-06-13T15:52:11.181Z",
+        "updatedAt": "2017-06-13T15:52:11.181Z",
+        "id": 2
       }
     ]
   },
@@ -85,7 +96,7 @@
   "counters": {
     "admin": {},
     "user": {
-      "id": 1
+      "id": 2
     }
   }
 }

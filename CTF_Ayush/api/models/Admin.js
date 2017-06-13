@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  schema:true,
+
   attributes: {
     name : {
       type:'string',
@@ -29,7 +31,16 @@ module.exports = {
     },
     sex:{
       type:'string',
+
     },
+
+    toJSON:function(){
+      var obj=this.toObject();
+      delete obj.password;
+      delete obj.passconf;
+      delete obj._csrf;
+      return obj;
+    }
 
   },
 };
