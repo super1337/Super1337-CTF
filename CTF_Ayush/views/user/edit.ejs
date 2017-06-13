@@ -8,7 +8,7 @@
 <div class="row">
           <div class="col-lg-6 col-lg-offset-3">
             <div class="well bs-component">
-              <form class="form-horizontal form-signin" method="post" action="/user/create">
+              <form class="form-horizontal form-signin" method="post" action="/user/update/<%= user.id %>">
                 <fieldset>
                   <legend>Sign-up</legend>
 
@@ -30,43 +30,43 @@
                   <div class="form-group">
                     <label for="name" class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
-                      <input type="text" class="form-control" id="name" placeholder="Full Name" name='name'>
+                      <input type="text" class="form-control" id="name" placeholder="Full Name" value="<%= user.name %>" name='name'>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="user" class="col-lg-2 control-label">Username</label>
                     <div class="col-lg-10">
-                      <input type="text" class="form-control" id="user" placeholder="Username" name='username'>
+                      <input type="text" class="form-control" id="user" placeholder="Username" value="<%= user.username %>" name='username'>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" name='email'>
+                      <input type="text" class="form-control" id="inputEmail" placeholder="Email" value="<%= user.email %>" name='email'>
                     </div>
                   </div>
-                  <div class="form-group">
+                <!--  <div class="form-group">
                     <label for="inputPassword" class="col-lg-2 control-label">Password</label>
                     <div class="col-lg-10">
-                      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name='password'>
+                      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name='password'>-->
                       <!--<div class="checkbox">
                         <label>
                           <input type="checkbox"> Checkbox
                         </label>
                       </div>-->
-                    </div>
+              <!--      </div>
                   </div>
                   <div class="form-group">
                     <label for="cnfPassword" class="col-lg-2 control-label" >Confirm</label>
                     <div class="col-lg-10">
-                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password" name="passconf">
+                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password" name="passconf"> -->
                       <!--<div class="checkbox">
                         <label>
                           <input type="checkbox"> Checkbox
                         </label>
                       </div>-->
-                    </div>
-                  </div>
+                <!--    </div>
+                </div>-->
                   <!--<div class="form-group">
                     <label for="textArea" class="col-lg-2 control-label">Textarea</label>
                     <div class="col-lg-10">
@@ -112,7 +112,6 @@
                   </div>
                   <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-4">
-                      <button type="reset" class="btn btn-default">Reset</button>&emsp;&emsp;&emsp;&emsp;
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </div>
@@ -123,4 +122,3 @@
               </form>
             </div>
           </div>
-        </div>

@@ -8,25 +8,9 @@
 <div class="row">
           <div class="col-lg-6 col-lg-offset-3">
             <div class="well bs-component">
-              <form class="form-horizontal form-signin" method="post" action="/user/create">
+              <form class="form-horizontal" method="post" action="/user/create">
                 <fieldset>
                   <legend>Sign-up</legend>
-
-
-                  <div class="form-group">
-
-                    <% if(flash && flash.err) { %>
-                      <ul class = "alert" style="background:#555">
-                        <% Object.keys(flash.err).forEach(function(error){ %>
-                        <li><%- JSON.stringify(flash.err[error]) %></li>
-                      <% }) %>
-                    </ul>
-                    <% } %>
-
-                  </div>
-
-
-
                   <div class="form-group">
                     <label for="name" class="col-lg-2 control-label">Name</label>
                     <div class="col-lg-10">
@@ -59,7 +43,7 @@
                   <div class="form-group">
                     <label for="cnfPassword" class="col-lg-2 control-label" >Confirm</label>
                     <div class="col-lg-10">
-                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password" name="passconf">
+                      <input type="password" class="form-control" id="cnfPassword" placeholder="ReType Password">
                       <!--<div class="checkbox">
                         <label>
                           <input type="checkbox"> Checkbox
@@ -79,13 +63,13 @@
                     <div class="col-lg-10">
                       <div class="radio">
                         <label>
-                          <input type="radio" name="sex" id="optionsRadios1" value="Male" checked="true">
+                          <input type="radio" name="sex" id="optionsRadios1" value="option1" checked="">
                           Male
                         </label>
                       </div>
                       <div class="radio">
                         <label>
-                          <input type="radio" name="sex" id="optionsRadios2" value="Female">
+                          <input type="radio" name="sex" id="optionsRadios2" value="option2">
                           Female
                         </label>
                       </div>
@@ -116,11 +100,7 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <input type="hidden" name="_csrf" value="<%= _csrf %>" />
-                  </div>
                 </fieldset>
               </form>
             </div>
           </div>
-        </div>

@@ -2966,6 +2966,9 @@ select[multiple].input-lg {
     top: 0;
   }
 }
+.form-signin{
+
+}
 .form-horizontal .radio,
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,

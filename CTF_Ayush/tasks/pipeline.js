@@ -31,6 +31,9 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
+  'js/jquery-3.2.1.js',
+  'js/jquery.validate.min.js',
+  //'js/customValidate.js',
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
@@ -84,5 +87,3 @@ module.exports.templateFilesToInject = templateFilesToInject.map(function(tplPat
   }
   return require('path').join('assets/',tplPath);
 });
-
-
