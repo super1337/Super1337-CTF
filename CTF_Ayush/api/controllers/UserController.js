@@ -72,7 +72,7 @@ module.exports = {
 		User.findOne(req.param('id'),function foundUser(err,user){
 
 			if(err) return next(err);
-			if(!user) return next();
+			if(!user) return next('User does\'t exists.');
 			res.view({
 				user:user
 			});
@@ -88,5 +88,23 @@ module.exports = {
 			res.redirect('/user/show/'+req.param('id'));
 		});
 	},
+
+	destroy:function(req,res,next){
+
+		User.findOne(req.param('id'),function foundUser(err,user){
+
+			if(err) return next(err);
+			if(!user) return next('User does\'t exists.');
+
+			User.destroy(req.param('id'),function userDestroyed(err){
+				if (err) return next(err);
+			});
+
+			res.redirect('/user');
+
+		});
+	},
+
+
 
 }

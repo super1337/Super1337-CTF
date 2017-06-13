@@ -23,50 +23,6 @@
         "createdAt": "2017-06-13T15:52:11.181Z",
         "updatedAt": "2017-06-13T15:52:11.181Z",
         "id": 2
-      },
-      {
-        "name": "aab",
-        "username": "aab",
-        "email": "aa@bb.com",
-        "password": "aab",
-        "sex": "option1",
-        "level": "Novice",
-        "createdAt": "2017-06-13T18:27:48.827Z",
-        "updatedAt": "2017-06-13T18:27:48.827Z",
-        "id": 3
-      },
-      {
-        "name": "aaa",
-        "username": "bbb",
-        "email": "aaa@ddd.com",
-        "password": "asd",
-        "sex": "option1",
-        "level": "Novice",
-        "createdAt": "2017-06-13T18:31:59.509Z",
-        "updatedAt": "2017-06-13T18:31:59.509Z",
-        "id": 4
-      },
-      {
-        "name": "abcd",
-        "username": "abcd",
-        "email": "abcd@xyz.com",
-        "password": "abcd",
-        "sex": "option1",
-        "level": "Novice",
-        "createdAt": "2017-06-13T18:55:51.254Z",
-        "updatedAt": "2017-06-13T18:55:51.254Z",
-        "id": 5
-      },
-      {
-        "name": "qwe",
-        "username": "qwe",
-        "email": "qwe@qwe.com",
-        "password": "qwe",
-        "sex": "option1",
-        "level": "Novice",
-        "createdAt": "2017-06-13T20:22:38.826Z",
-        "updatedAt": "2017-06-13T20:22:38.826Z",
-        "id": 6
       }
     ]
   },
