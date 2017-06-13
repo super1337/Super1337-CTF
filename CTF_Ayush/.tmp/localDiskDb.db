@@ -1,0 +1,91 @@
+{
+  "data": {
+    "admin": [],
+    "user": [
+      {
+        "name": "abc",
+        "username": "abc",
+        "email": "abc@xyz.com",
+        "password": "abc",
+        "sex": "option1",
+        "level": "Novice",
+        "createdAt": "2017-06-13T14:45:01.310Z",
+        "updatedAt": "2017-06-13T14:45:01.310Z",
+        "id": 1
+      }
+    ]
+  },
+  "schema": {
+    "admin": {
+      "name": {
+        "type": "string"
+      },
+      "username": {
+        "type": "string",
+        "unique": true
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "password": {
+        "type": "string"
+      },
+      "sex": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    },
+    "user": {
+      "name": {
+        "type": "string"
+      },
+      "username": {
+        "type": "string",
+        "unique": true
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "password": {
+        "type": "string"
+      },
+      "sex": {
+        "type": "string"
+      },
+      "level": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      },
+      "updatedAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "admin": {},
+    "user": {
+      "id": 1
+    }
+  }
+}
