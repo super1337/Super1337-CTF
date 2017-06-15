@@ -44,7 +44,22 @@ module.exports = {
       delete obj.passconf;
       delete obj._csrf;
       return obj;
-    }
+    },
 
   },
+
+
+  beforeCreate : function(values,next){
+
+    if(!values.password || values.password!=values.passconf){
+      return next({err:["Password doesn't match."]});
+    }
+
+    require('bcrypt').hash(values.password,10,function passwordEncrypted(err,encryptedPassword){
+      if (err) return next(err);
+      values.password=encryptedPassword;
+      // values.online=true;
+      next();
+    });
+  }
 };

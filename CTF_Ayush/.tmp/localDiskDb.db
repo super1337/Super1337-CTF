@@ -23,6 +23,28 @@
         "createdAt": "2017-06-13T15:52:11.181Z",
         "updatedAt": "2017-06-13T15:52:11.181Z",
         "id": 2
+      },
+      {
+        "name": "check",
+        "username": "check",
+        "email": "check@check.com",
+        "password": "check",
+        "sex": "Male",
+        "level": "Novice",
+        "createdAt": "2017-06-14T18:52:14.066Z",
+        "updatedAt": "2017-06-14T18:52:14.066Z",
+        "id": 7
+      },
+      {
+        "name": "mo",
+        "username": "mo",
+        "email": "mo@mo.com",
+        "password": "$2a$10$W.dZ8w6GoE8WqrlfIAQbJejo51tTXij8as2jQ7iwBRFsVtV5g7H1i",
+        "sex": "Male",
+        "level": "Novice",
+        "createdAt": "2017-06-14T20:07:46.263Z",
+        "updatedAt": "2017-06-14T20:07:46.263Z",
+        "id": 8
       }
     ]
   },
@@ -96,7 +118,7 @@
   "counters": {
     "admin": {},
     "user": {
-      "id": 6
+      "id": 8
     }
   }
 }
