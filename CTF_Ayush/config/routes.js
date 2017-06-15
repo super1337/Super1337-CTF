@@ -35,6 +35,7 @@ module.exports.routes = {
   '/': {
     view: 'static/index'
   },
+  
 /*  '/login': {
     view: 'static/login'
   },
