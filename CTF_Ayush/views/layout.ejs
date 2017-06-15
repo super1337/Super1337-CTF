@@ -51,15 +51,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">IITD Penetration</a>
+      <a class="navbar-brand" href="http://www.ujjwalsinha.com">IITD Penetration</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Beginners</a></li>
+        <li><a href="/contest/round1">Beginners</a></li>
         <li><a href="/contest/">Contests</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="https://www.facebook.com/ujjwalsinha.iitd/about?lst=100001261091986%3A100007801955549%3A1497556145">About</a></li>
 
 
 
@@ -91,10 +91,18 @@
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>
+      <% if(!session.authenticated) { %>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/session/login">Login</a></li>
         <li><a href="/user/signup">Sign Up</a></li>
       </ul>
+      <% } %>
+      <% if(session.authenticated) { %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/show/<%= session.User.id %>">Hi, <%= session.User.username %></a></li>
+        <li><a href="/session/destroy">Sign Out</a></li>
+      </ul>
+      <% } %>
     </div>
   </div>
 </nav>
@@ -166,7 +174,7 @@
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/customValidate.js"></script>
     <!--SCRIPTS END-->
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     <p style="position:fixed !important;bottom:0 !important;">
       <hr><center>
       <!--<h4>Copyright </h4>-->

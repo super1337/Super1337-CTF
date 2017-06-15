@@ -88,7 +88,7 @@ module.exports = {
 				return res.redirect('/user/edit/'+req.param('id'));
 			}
 
-			res.redirect('/user/show/'+req.param('id'));
+			res.redirect('/user/postsign/'+req.param('id'));
 		});
 	},
 

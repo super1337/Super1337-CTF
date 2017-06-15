@@ -22,7 +22,8 @@ module.exports = {
 	create:function(req,res,next){
 
 		if(!req.param('username') || !req.param('password')){
-			var notfillerr = [{name:'notfillerr',message:'Enter both username and password.'}]
+			// var notfillerr = [{name:'notfillerr',message:'Enter both username and password.'}]
+			var notfillerr = ['Enter both username and password.']
 
 			req.session.flash={
 				err:notfillerr
@@ -36,7 +37,8 @@ module.exports = {
 			if (err) return next(err);
 
 			if(!user){
-				var notfounderr=[{name:'notfounderr',message:'Invalid Email-ID or Password'}]
+				// var notfounderr=[{name:'notfounderr',message:'Invalid Email-ID or Password'}]
+				var notfillerr = ['Invalid Email-ID or Password']
 
 				req.session.flash={
 					err:notfounderr
@@ -50,7 +52,8 @@ module.exports = {
 				if (err) return next(err);
 
 				if(!valid){
-				var notfounderr=[{name:'notfounderr',message:'Invalid Email-ID or Password'}]
+				// var notfounderr=[{name:'notfounderr',message:'Invalid Email-ID or Password'}]
+				var notfillerr = ['Invalid Email-ID or Password']
 
 				req.session.flash={
 					err:notfounderr
