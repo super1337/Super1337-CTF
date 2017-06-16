@@ -97,7 +97,7 @@
         <li><a href="/user/signup">Sign Up</a></li>
       </ul>
       <% } %>
-      <% if(session.authenticated && !(session.User.admin)) { %>
+      <% if(session.authenticated) { %>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/user/show/<%= session.User.id %>">Hi, <%= session.User.username %></a></li>
         <li><a href="/session/destroy">Sign Out</a></li>

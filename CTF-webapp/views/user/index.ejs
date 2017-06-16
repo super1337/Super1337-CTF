@@ -3,6 +3,7 @@
   <hr>
   <table class="table table-striped table-hover ">
   <thead>
+    <th>Online</th>
     <th>ID</th>
     <th>Admin</th>
     <th>Name</th>
@@ -14,6 +15,11 @@
 
   <% _.each(users,function(user){ %>
   <tr data-id=<%= user.id %> data-modal="user">
+  <% if(user.online) { %>
+    <td><img src="https://d19rpgkrjeba2z.cloudfront.net/dc25e9dfd0ebe580/static/nextdoorv2/images/icons/icon-check-ok@2x.png" width="30"></td>
+    <% } else { %>
+    <td><img src="http://www.freeiconspng.com/uploads/remove-icon-png-15.png" width="30"></td>
+    <% } %>
     <td><%= user.id %></td>
     <% if(user.admin) { %>
     <td><img src="https://d19rpgkrjeba2z.cloudfront.net/dc25e9dfd0ebe580/static/nextdoorv2/images/icons/icon-check-ok@2x.png" width="30"></td>

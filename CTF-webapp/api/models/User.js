@@ -41,6 +41,10 @@ module.exports = {
       type:'boolean',
       defaultsTo:false,
     },
+    online:{
+      type:'boolean',
+      defaultsTo:false,
+    },
 
     toJSON:function(){
       var obj=this.toObject();

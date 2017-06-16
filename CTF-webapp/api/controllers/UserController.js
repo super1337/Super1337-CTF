@@ -28,9 +28,13 @@ module.exports = {
 			}
 			req.session.authenticated=true;
 			req.session.User=user;
+			user.online=true;
 			//res.json(user);
 			//req.session.flash={};
+			user.save(function(err,user){
+				if(err) return next(err);
 			res.redirect('/user/postsign/'+user.id);
+		});
 		});
 	},
 

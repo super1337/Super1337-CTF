@@ -66,6 +66,11 @@ module.exports = {
 
 				req.session.authenticated=true;
 				req.session.User=user;
+				user.online=true;
+			//res.json(user);
+			//req.session.flash={};
+			user.save(function(err){
+				if(err) return next(err);
 
 				if(req.session.User.admin){
 					res.redirect('/user');
@@ -74,15 +79,28 @@ module.exports = {
 
 				res.redirect('/user/show/'+user.id);
 			});
+			});
 
 		});
 	},
 
 	destroy:function(req,res,next){
 
-		req.session.destroy();
+		User.findOne(req.session.User.id,function foundUser(err,user){
+			var userID = req.session.User.id;
 
-		res.redirect('/session/login');
+			User.update(userID,{
+				online:false
+			},function(err){
+				if(err) return next(err);
+
+				req.session.destroy();
+
+				res.redirect('/session/login');
+			})
+		})
+
+		
 	}
 	
 };
