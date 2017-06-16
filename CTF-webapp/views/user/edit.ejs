@@ -13,17 +13,7 @@
                   <legend>Sign-up</legend>
 
 
-                  <div class="form-group">
-
-                    <% if(flash && flash.err) { %>
-                      <ul class = "alert" style="background:#555">
-                        <% Object.keys(flash.err).forEach(function(error){ %>
-                        <li><%- JSON.stringify(flash.err[error]) %></li>
-                      <% }) %>
-                    </ul>
-                    <% } %>
-
-                  </div>
+ 
 
 
 
@@ -101,6 +91,11 @@
                         <option>Expert</option>
                       </select>
                       <br>
+                  <div class="form-group">
+                    <label for="admin" class="col-lg-2 control-label">Admin</label>
+                      <input type="checkbox" class="form-control" id="admin" name='admin'>
+                    </div>
+                  </div>
                       <!--<select multiple="" class="form-control">
                         <option>1</option>
                         <option>2</option>

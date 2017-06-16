@@ -37,6 +37,10 @@ module.exports = {
       type:'string',
 
     },
+    admin:{
+      type:'boolean',
+      defaultsTo:false,
+    },
 
     toJSON:function(){
       var obj=this.toObject();
@@ -47,6 +51,18 @@ module.exports = {
     },
 
   },
+
+  // beforeValidation : function(values,next){
+  //   if(typeof values.admin !== 'undefined'){
+  //     if(value.admin === 'unchecked'){
+  //       values.admin=false;
+  //     }
+  //     else if(values.admin[1]==='on'){
+  //       values.admin=true;
+  //     }
+  //   }
+  //   next();
+  // }
 
 
   beforeCreate : function(values,next){
