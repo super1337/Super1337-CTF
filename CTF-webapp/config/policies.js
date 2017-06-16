@@ -30,6 +30,7 @@ module.exports.policies = {
 
   user:{
     'signup':'flash',
+    create:'flash',
     '*':'sessionAuth'
   },
   contest:{

@@ -26,6 +26,8 @@ module.exports = {
 
 				return res.redirect('/user/signup');
 			}
+			req.session.authenticated=true;
+			req.session.User=user;
 			//res.json(user);
 			//req.session.flash={};
 			res.redirect('/user/postsign/'+user.id);
