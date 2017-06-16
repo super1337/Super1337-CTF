@@ -18,7 +18,7 @@
     <td><%= user.username %></td>
     <td><%= user.email %></td>
     <td><%= user.level %></td>
-    <td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary" disabled>Show</a></td>
+    <td><a href="/user/show/<%= user.id %>" class="btn btn-sm btn-primary">Show</a></td>
     <td><a href="/user/edit/<%= user.id %>" class="btn btn-sm btn-warning" disabled>Edit</a></td>
     <td>
       <form action="/user/destroy/<%= user.id %>" method="post">
