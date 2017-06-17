@@ -31,13 +31,13 @@ module.exports = {
 			user.online=true;
 			//res.json(user);
 			//req.session.flash={};
-			user.save(function(err,User){
+			user.save(function(err,user1){
 				if(err) return next(err);
 
-				// user.publishUpdate(user.id,{
-				// 	loggedIn:true,
-				// 	id:user.id
-				// });
+				User.publishUpdate(user.id,{
+					loggedIn:true,
+					id:user.id
+				})
 
 			res.redirect('/user/postsign/'+user.id);
 		});
