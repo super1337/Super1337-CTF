@@ -72,6 +72,11 @@ module.exports = {
 			user.save(function(err){
 				if(err) return next(err);
 
+				User.publishUpdate(user.id,{
+					loggedIn:true,
+					id:user.id
+				})
+
 				if(req.session.User.admin){
 					res.redirect('/user');
 					return;
