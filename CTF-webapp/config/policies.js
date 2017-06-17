@@ -31,6 +31,7 @@ module.exports.policies = {
   user:{
     'signup':'flash',
     create:'flash',
+    subscribe:'flash',
     show:'uCantCMe',
     edit:'uCantCMe',
     update:'uCantCMe',

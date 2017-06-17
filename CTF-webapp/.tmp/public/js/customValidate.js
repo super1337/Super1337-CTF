@@ -25,7 +25,7 @@ $(document).ready(function(){
         equalTo:"#password",
       },
       sex:{},
-      level{},
+      level:{},
 
     },
     success:function(element){

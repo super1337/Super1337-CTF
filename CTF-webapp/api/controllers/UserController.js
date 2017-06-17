@@ -33,6 +33,12 @@ module.exports = {
 			//req.session.flash={};
 			user.save(function(err,User){
 				if(err) return next(err);
+
+				// user.publishUpdate(user.id,{
+				// 	loggedIn:true,
+				// 	id:user.id
+				// });
+
 			res.redirect('/user/postsign/'+user.id);
 		});
 		});
@@ -123,6 +129,8 @@ module.exports = {
 			User.subscribe(req.socket);
 
 			User.subscribe(req.socket,users);
+
+			res.send(200);
 		})
 	}
 
