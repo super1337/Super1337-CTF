@@ -34,6 +34,7 @@ var jsFilesToInject = [
   'js/dependencies/**/*.js',
   'js/jquery-3.2.1.js',
   'js/jquery.validate.min.js',
+  'js/socket.io.js',
   //'js/customValidate.js',
 
   // All of the rest of your client-side js files
