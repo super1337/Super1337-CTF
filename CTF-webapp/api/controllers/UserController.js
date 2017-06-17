@@ -31,7 +31,7 @@ module.exports = {
 			user.online=true;
 			//res.json(user);
 			//req.session.flash={};
-			user.save(function(err,user){
+			user.save(function(err,User){
 				if(err) return next(err);
 			res.redirect('/user/postsign/'+user.id);
 		});
@@ -113,6 +113,18 @@ module.exports = {
 
 		});
 	},
+
+	subscribe:function(req,res){
+
+		User.find(function foundUser(err,users){
+
+			if(err) return next(err);
+
+			User.subscribe(req.socket);
+
+			User.subscribe(req.socket,users);
+		})
+	}
 
 
 
