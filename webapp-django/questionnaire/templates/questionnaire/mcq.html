@@ -25,17 +25,21 @@ Round1
                   <div class="form-group">
                     <ol>
 
-              
-                    <li><br>
+              {% for ques in questions %}
+                    <li>{% ques.question %}<br>
 
                     <ul type=''>
-
+                      {% x=0 %}
+                  {% for choices in ques.choices %}
+                    {% x+=1 %}
                     <div class="radio">
                         <label>
                           <input type="radio" name="q1" id="optionsRadios2" value="o1">
                           <li>&nbsp;</li>
                         </label>
                     </div>
+                  {% endfor %}
+                {% endfor %}
 
 
 
