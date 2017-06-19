@@ -11,7 +11,7 @@ class Question(models.Model):
 
 
 class MultipleChoiceQuestion(Question):
-    choices = models.CharField(choices=[])
+    choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
 
     @classmethod
