@@ -1,8 +1,9 @@
 import json
+
 from questionnaire.models import Question, MultipleChoiceQuestion
 
-
 JSON_FILENAME = 'questions.json'
+
 
 def addquestions(filename=JSON_FILENAME):
     with open(filename, mode='w') as jsonfile:

@@ -1,5 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
+
 from questionnaire.questions import questions
+
 
 class Command(BaseCommand):
     help = 'Adds the questions from input JSON file to Database.'
