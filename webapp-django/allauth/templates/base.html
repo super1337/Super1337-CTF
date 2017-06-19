@@ -98,8 +98,13 @@
         <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/session/login">Login</a></li>
-        <li><a href="/session/signup">Sign Up</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
@@ -127,7 +132,7 @@
     </div>
     {% endif %}
 
-    <div>
+    <!-- <div>
       <strong>Menu:</strong>
       <ul>
   {% if user.is_authenticated %}
@@ -138,7 +143,7 @@
   <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
   {% endif %}
       </ul>
-    </div>
+    </div> -->
     {% block content %}
     {% endblock %}
     {% endblock %}

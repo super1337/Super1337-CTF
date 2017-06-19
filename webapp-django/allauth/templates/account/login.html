@@ -7,6 +7,20 @@
 
 {% block content %}
 
+
+
+<style>
+.col-lg-2 {
+   text-Align:left !important;
+}
+
+</style>
+
+<div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <div class="well bs-component">
+
+
 <h1>{% trans "Sign In" %}</h1>
 
 {% get_providers as socialaccount_providers %}
@@ -42,5 +56,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
+</div>
+</div>
+</div>
 
 {% endblock %}
