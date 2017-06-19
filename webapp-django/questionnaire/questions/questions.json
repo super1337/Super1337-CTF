@@ -1,0 +1,22 @@
+{
+  "QUESTIONS": [
+    {
+      "question": "What is the full form of IP?",
+      "hint": "Seriously?!",
+      "answer": "Internet Protocol"
+    }
+  ],
+  "MCQS": [
+    {
+      "question": "What is the full form of IP?",
+      "hint": "Seriously?!",
+      "choices": [
+        "Internet Programs",
+        "Internet Protocol",
+        "Internal Protocol",
+        "International Protocol"
+      ],
+      "correct": 2
+    }
+  ]
+}
