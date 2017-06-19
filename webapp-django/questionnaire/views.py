@@ -1,3 +1,5 @@
 from django.shortcuts import render
+from .models import Question, MultipleChoiceQuestion
 
-# Create your views here.
+def mcq(request):
+    return render(request,'questionnaire/mcq.html',{})
