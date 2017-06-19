@@ -1,22 +1,20 @@
 from django.core.management.base import BaseCommand, CommandError
-from questionnaire.models import Question
+from questionnaire.questions import questions
 
 class Command(BaseCommand):
     help = 'Adds the questions from input JSON file to Database.'
 
     def add_arguments(self, parser):
-        parser.add_argument('poll_id', nargs='+', type=int)
+        parser.add_argument(
+            '--inputfile',
+            dest='inputfile',
+            help='Path of the input JSON file'
+        )
 
     def handle(self, *args, **options):
+        if options['inputfile']:
+            questions.addquestions(options['inputfile'])
+        else:
+            questions.addquestions()
 
-
-        for poll_id in options['poll_id']:
-            try:
-                poll = Poll.objects.get(pk=poll_id)
-            except Poll.DoesNotExist:
-                raise CommandError('Poll "%s" does not exist' % poll_id)
-
-            poll.opened = False
-            poll.save()
-
-            self.stdout.write(self.style.SUCCESS('Successfully closed poll "%s"' % poll_id))
+        self.stdout.write(self.style.SUCCESS('Successfully added questions'))
