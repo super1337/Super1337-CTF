@@ -6,11 +6,16 @@
 2. `cd` to the _Django_ project directory: `cd SuperLeet-CTF/webapp-django/`
 3. Run the server: `python3 manage.py runserver`
 
-##Troubleshoot
+## Troubleshoot
+
 (For Those migrating from python2.x to python3.x)
 While running `python3 manage.py runserver` you may get an `import django` error.
 The reason being the use of `pip3` instead of `pip`.
 Run `pip3 install django` and your problem will be solved.
+
+`OR`
+
+Run `pip3 install -r requirements.txt` in `webapp-django` directory.
 
 
 ## Project Description
