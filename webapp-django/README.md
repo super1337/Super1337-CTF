@@ -73,3 +73,4 @@ By default is assumes the input `JSON` file is `questionnaire/questions/question
 - [x] Create core functionalities for the `questionnaire` app.
 - [ ] Create scoring system for `questionnaire`.
 - [ ] Complete `questionnaire` by making `routes`, `views` and `templates`.
+- [ ] Make `models` and basic backbone for _jeopardy-style challenges_.
