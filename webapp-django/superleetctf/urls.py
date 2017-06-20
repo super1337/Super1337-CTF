@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^questionnaire/', include('questionnaire.urls')),
+    url(r'^jeopardy/', include('jeopardyctf.urls')),
 
     url(r'^$', views.index, name='index')
 ]
