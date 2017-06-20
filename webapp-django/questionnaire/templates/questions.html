@@ -26,10 +26,10 @@ Round1
                     <ol>
 
               {% for ques in questions %}
-                    <li>{{ ques.0 }}</li><br>
+                    <li>{{ ques.question }}</li><br>
 
                     <ul type=''>
-                  {% for x in ques.1 %}
+                  {% for x in ques.choices %}
                     <div class="radio">
                         <label>
                           <input type="radio" name="'o'+{{ x.0 }}" id="optionsRadios2" value="'o'+{{ x.1 }}">

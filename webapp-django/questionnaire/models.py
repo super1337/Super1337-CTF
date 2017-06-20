@@ -1,5 +1,4 @@
 from django.db import models
-import os
 
 
 class Question(models.Model):
@@ -11,6 +10,10 @@ class Question(models.Model):
         return str(self.question)
 
 
+class SimpleQuestion(Question):
+    pass
+
+
 class MultipleChoiceQuestion(Question):
     choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
@@ -19,5 +22,5 @@ class MultipleChoiceQuestion(Question):
     def create(cls, question, hints, choices, correct):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
         answer = CHOICES[correct][1]
-        mcq = cls(choices=CHOICES, correct=correct, answer=answer)
+        mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer)
         return mcq

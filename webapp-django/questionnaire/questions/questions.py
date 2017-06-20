@@ -1,6 +1,6 @@
 import json
 
-from questionnaire.models import Question, MultipleChoiceQuestion
+from questionnaire.models import SimpleQuestion, MultipleChoiceQuestion
 
 JSON_FILEPATH = 'questionnaire/questions/'
 JSON_FILENAME = 'questions.json'
@@ -13,7 +13,7 @@ def addquestions(filename=JSON_FILEPATH+JSON_FILENAME):
         mcqs = quesjson['MCQS']
 
         for question in questions:
-            ques = Question(question=question['question'],
+            ques = SimpleQuestion(question=question['question'],
                             hints=question['hints'],
                             answer=question['answer'])
             ques.save()

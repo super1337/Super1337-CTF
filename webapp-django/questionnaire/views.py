@@ -1,6 +1,8 @@
+from itertools import chain
+
 from django.shortcuts import render
 
-from .models import Question, MultipleChoiceQuestion
+from .models import SimpleQuestion, MultipleChoiceQuestion
 
 
 def index(request):
@@ -8,19 +10,7 @@ def index(request):
 
 
 def questions(request):
-    ques = MultipleChoiceQuestion.objects.all() # + Question.objects.all()
-    questions = []
-
-    p = 0
-    for h in ques:
-        p += 1
-        q = 0
-        qu = [h['question']]
-        ch = []
-        for i in h.choices:
-            q += 1
-            ch += [[q, i]]
-        qu += [[ch]]
-        questions += [qu]
+    questions = list(chain(SimpleQuestion.objects.all(), MultipleChoiceQuestion.objects.all()))
+    print(questions)
 
     return render(request, 'questions.html', {'questions': questions})
