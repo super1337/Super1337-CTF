@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+
+from .models import Document
+from .forms import DocumentForm
 
 
 def index(request):
@@ -23,9 +26,9 @@ def upload2(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('/jeopardy')
     else:
         form = DocumentForm()
-    return render(request, 'jeopardy/upload2.html', {
+    return render(request, 'jeopardyctf/upload2.html', {
         'form': form
     })
