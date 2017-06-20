@@ -8,11 +8,11 @@ def index(request):
 
 
 def questions(request):
-    ques = MultipleChoiceQuestion.objects.all() + Question.objects.all()
+    ques = MultipleChoiceQuestion.objects.all() # + Question.objects.all()
     questions = []
 
     p = 0
-    for h in que:
+    for h in ques:
         p += 1
         q = 0
         qu = [h['question']]
