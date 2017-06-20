@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+import os
 
 from .models import Document
 from .forms import DocumentForm
@@ -9,7 +10,7 @@ from .forms import DocumentForm
 def index(request):
     path=settings.MEDIA_ROOT
     file_list =os.listdir(path)
-    return render_to_response('index.html', {'files': file_list})
+    return render(request,'jeopardyctf/index.html', {'files': file_list})
 
 
 def upload(request):
