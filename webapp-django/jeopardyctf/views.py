@@ -7,7 +7,9 @@ from .forms import DocumentForm
 
 
 def index(request):
-    return render(request,'jeopardyctf/index.html',{})
+    path=settings.MEDIA_ROOT
+    file_list =os.listdir(path)
+    return render_to_response('index.html', {'files': file_list})
 
 
 def upload(request):
