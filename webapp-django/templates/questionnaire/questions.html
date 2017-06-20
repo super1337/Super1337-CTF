@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}
+Round1
+{% endblock %}
+
+
+{% block content %}
+
+<style>
+    .col-lg-2 {
+        text-Align: left !important;
+    }
+
+</style>
+<br><br><br><br><br>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="well bs-component">
+            <form class="form-horizontal form-signin" method="post" action="/session/create">
+                <fieldset>
+                    <legend>Round 1 (Multiple Choise Questions)</legend>
+
+                    <div class="form-group">
+                        <ol>
+
+                            {% for ques in questions %}
+                            <li>{{ ques.question }}</li>
+                            <br>
+
+                            <ul type=''>
+                                {% for x in ques.choices %}
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="'o'+{{ x.0 }}" id="optionsRadios2"
+                                               value="'o'+{{ x.1 }}">
+                                        <li>&nbsp;</li>
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </ul>
+
+
+                            </li><br><br>
+                            {% endfor %}
+
+
+                        </ol>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
