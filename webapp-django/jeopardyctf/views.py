@@ -1,6 +1,5 @@
 from django.shortcuts import render
 
-from .models import SimpleQuestion, MultipleChoiceQuestion
 
 
 def index(request):
