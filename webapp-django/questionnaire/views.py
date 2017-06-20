@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Question, MultipleChoiceQuestion
 
-def mcq(request):
-    que=MultipleChoiceQuestion.objects.all()
+def questions(request):
+    ques = MultipleChoiceQuestion.objects.all() + Question.objects.all()
     questions=[]
+
     p=0
     for h in que:
         p+=1
@@ -16,4 +17,4 @@ def mcq(request):
         qu+=[[ch]]
         questions+=[qu]
 
-    return render(request,'questionnaire/mcq.html',{'questions':questions})
+    return render(request, 'questions.html', {'questions':questions})
