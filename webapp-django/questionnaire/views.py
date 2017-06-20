@@ -6,11 +6,11 @@ from .models import SimpleQuestion, MultipleChoiceQuestion
 
 
 def index(request):
-    pass
+    return render(request,'questionnaire/index.html',{})
 
 
 def questions(request):
     questions = list(chain(SimpleQuestion.objects.all(), MultipleChoiceQuestion.objects.all()))
     print(questions)
 
-    return render(request, 'questions.html', {'questions': questions})
+    return render(request, 'questionnaire/questions.html', {'questions': questions})
