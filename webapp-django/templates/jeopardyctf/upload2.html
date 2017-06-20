@@ -1,11 +1,23 @@
-{% extends 'base.html' %}
 
-{% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-  </form>
+<style>
+.col-lg-2 {
+   text-Align:left !important;
+}
 
-  <p><a href="{% url 'home' %}">Return to home</a></p>
+</style>
+<br><br><br><br><br>
+<div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            <div class="well bs-component">
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Upload</button>
+              </form>
+
+              <p><a href="/jeopardy/">Go To Challenges</a></p>
+            </div>
+          </div>
+        </div>
+
 {% endblock %}
