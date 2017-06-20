@@ -2,11 +2,12 @@ import json
 
 from questionnaire.models import Question, MultipleChoiceQuestion
 
+JSON_FILEPATH = 'questionnaire/questions/'
 JSON_FILENAME = 'questions.json'
 
 
-def addquestions(filename=JSON_FILENAME):
-    with open(filename, mode='w') as jsonfile:
+def addquestions(filename=JSON_FILEPATH+JSON_FILENAME):
+    with open(filename) as jsonfile:
         quesjson = json.load(jsonfile)
         questions = quesjson['QUESTIONS']
         mcqs = quesjson['MCQS']
@@ -23,3 +24,4 @@ def addquestions(filename=JSON_FILENAME):
                                                  choices=mcq['choices'],
                                                  correct=int(mcq['correct']))
             ques.save()
+    return filename

@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 
 class Question(models.Model):
@@ -15,7 +16,7 @@ class MultipleChoiceQuestion(Question):
     correct = models.IntegerField()
 
     @classmethod
-    def create(cls, choices, correct):
+    def create(cls, question, hints, choices, correct):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
         answer = CHOICES[correct][1]
         mcq = cls(choices=CHOICES, correct=correct, answer=answer)

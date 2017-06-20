@@ -15,8 +15,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options['inputfile']:
-            questions.addquestions(options['inputfile'])
+            ret = questions.addquestions(options['inputfile'])
         else:
-            questions.addquestions()
+            ret = questions.addquestions()
 
-        self.stdout.write(self.style.SUCCESS('Successfully added questions'))
+        self.stdout.write(self.style.SUCCESS('Successfully added questions to DB from \'{}\''.format(ret)))
