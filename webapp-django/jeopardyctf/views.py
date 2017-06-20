@@ -17,3 +17,15 @@ def upload(request):
             'uploaded_file_url': uploaded_file_url
         })
     return render(request, 'jeopardyctf/upload.html')
+
+def upload2(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DocumentForm()
+    return render(request, 'jeopardy/upload2.html', {
+        'form': form
+    })
