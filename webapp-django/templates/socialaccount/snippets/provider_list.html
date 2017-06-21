@@ -28,13 +28,13 @@
 
 {% endifequal %}
 
-{% ifequal provider.name "Github" %}
+{% ifequal provider.name "GitHub" %}
 
   <!-- <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
      href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="https://image.flaticon.com/icons/png/512/37/37409.png" width="32px"/></a> -->
 
      <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
-        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="http://space-james.herokuapp.com/static/imgs/new-github.png" width="40px"/></a>
+        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="http://space-james.herokuapp.com/static/imgs/new-github.png" width="50px"/></a>
 
 {% endifequal %}
 
