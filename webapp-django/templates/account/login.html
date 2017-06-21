@@ -17,7 +17,7 @@
 </style>
 
 <div class="row">
-          <div class="col-lg-6 col-lg-offset-3">
+          <div class="col-lg-4 col-lg-offset-4">
             <div class="well bs-component">
 
 
@@ -29,16 +29,24 @@
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
 of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
 for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
-
+<br>
+<center>
 <div class="socialaccount_ballot">
 
   <ul class="socialaccount_providers">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </ul>
 
-  <div class="login-or">{% trans 'or' %}</div>
+<br>
+<hr>
+
+  <div class="login-or">{% trans 'or' %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 </div>
+</center>
+
+<br>
 
 {% include "socialaccount/snippets/login_extra.html" %}
 
