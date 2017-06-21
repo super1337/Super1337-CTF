@@ -1,17 +1,17 @@
-{% extends 'base.html' %}
+from django import forms
+from .models import Questions,SimpleQuestion,MultipleChoiceQuestion
 
-{% load static %}
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('question','hints','answer' )
 
-{% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="file" name="myfile">
-    <button type="submit">Upload</button>
-  </form>
+class SimpleQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('question','hints','answer' )
 
-  {% if uploaded_file_url %}
-    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-  {% endif %}
-
-  <p><a href="{% url 'home' %}">Return to home</a></p>
-{% endblock %}
+class MultipleChoiceQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('question','hints','answer','choices','correct' )

@@ -22,14 +22,18 @@ Contests
 
                   <div class="form-group">
                     <ul>
-                    <li><a href="#">Challenge 1</a></li>
-                    <li><a href="#">Challenge 2</a></li>
+                    <!-- <li><a href="#">Challenge 1</a></li>
+                    <li><a href="#">Challenge 2</a></li> -->
+                    {% for file in files %}
+                      <li><a href="/media/{{file}}">{{file}}</li>
+                    {% endfor %}
+                  </ul>
                     </div>
 
                 </fieldset>
               </form>
             </div>
           </div>
-        </div>
+</div>
 
 {% endblock %}
