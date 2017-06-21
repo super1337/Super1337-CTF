@@ -23,7 +23,7 @@ class Challenge(models.Model):
     hints = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField()
-    # creators = models.ManyToManyField(User)
+    creators = models.ManyToManyField(User)
     flag = models.CharField(max_length=256)
 
     created = models.DateTimeField(editable=False)
