@@ -103,3 +103,5 @@ ENV/
 # Pycharm temp directory
 .idea
 
+# SQLite Database
+db.sqlite3
