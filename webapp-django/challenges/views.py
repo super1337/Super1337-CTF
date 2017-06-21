@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
-from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-import os
+from django.shortcuts import render, redirect
 
 from .models import Challenge
-from .forms import DocumentForm
+
+
+# from .forms import DocumentForm
 
 
 def index(request):

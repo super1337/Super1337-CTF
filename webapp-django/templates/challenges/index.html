@@ -1,39 +1,43 @@
-{% extends 'base.html' %}
+{% extends 'challenges/base.html' %}
 
-{% block head_title %}
-Contests
+{% block title %}
+    Contests
 {% endblock %}
 
 {% block content %}
+    <div>
+        {% for challenge in challeges %}
+            {{ challenge.name }}:  {{ challenge.score }}
+        {% endfor %}
+    </div>
 
-<style>
-.col-lg-2 {
-   text-Align:left !important;
-}
+    <!---
+    <style>
+        .col-lg-2 {
+            text-Align: left !important;
+        }
+    </style>
 
-</style>
-<br><br><br><br><br>
-<div class="row">
-          <div class="col-lg-4 col-lg-offset-4">
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
             <div class="well bs-component">
-              <form class="form-horizontal form-signin" method="post" action="/session/create">
-                <fieldset>
-                  <legend>On-Going Contests</legend>
+                <form class="form-horizontal form-signin" method="post" action="/session/create">
+                    <fieldset>
+                        <legend>On-Going Contests</legend>
 
-                  <div class="form-group">
-                    <ul>
-                    <!-- <li><a href="#">Challenge 1</a></li>
-                    <li><a href="#">Challenge 2</a></li> -->
-                    {% for file in files %}
-                      <li><a href="/media/{{file}}">{{file}}</li>
-                    {% endfor %}
-                  </ul>
-                    </div>
+                        <div class="form-group">
+                            <ul>
+                                {% for file in files %}
+                                    <li><a href="/media/{{ file }}">{{ file }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
 
-                </fieldset>
-              </form>
+                    </fieldset>
+                </form>
             </div>
-          </div>
-</div>
+        </div>
+    </div>
+-->
 
 {% endblock %}
