@@ -1,17 +1,15 @@
 from django import forms
-from .models import Questions,SimpleQuestion,MultipleChoiceQuestion
 
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = ('question','hints','answer' )
+from .models import SimpleQuestion, MultipleChoiceQuestion
+
 
 class SimpleQuestionForm(forms.ModelForm):
     class Meta:
-        model = Question
-        fields = ('question','hints','answer' )
+        model = SimpleQuestion
+        fields = ('question', 'hints', 'answer')
+
 
 class MultipleChoiceQuestionForm(forms.ModelForm):
     class Meta:
-        model = Question
-        fields = ('question','hints','answer','choices','correct' )
+        model = MultipleChoiceQuestion
+        fields = ('question', 'hints', 'answer', 'choices', 'correct')
