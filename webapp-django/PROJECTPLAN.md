@@ -10,3 +10,5 @@ For now, challenges will be uploaded by the admins only, maybe through direct en
 ## Scoring system
 
 When an user solves a challenge by correctly submitting the flag, the allotted score will be added to the User's score. And a ManyToMany relationship will be made between the Users and the Challenges.
+
+

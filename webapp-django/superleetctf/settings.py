@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'questionnaire',
-    'jeopardyctf'
+    'challenges'
 ]
 
 MIDDLEWARE = [
