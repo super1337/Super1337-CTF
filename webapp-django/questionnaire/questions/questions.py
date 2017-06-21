@@ -14,14 +14,16 @@ def addquestions(filename=JSON_FILEPATH+JSON_FILENAME):
 
         for question in questions:
             ques = SimpleQuestion(question=question['question'],
-                            hints=question['hints'],
-                            answer=question['answer'])
+                                  hints=question['hints'],
+                                  answer=question['answer'],
+                                  score=question['score'])
             ques.save()
 
         for mcq in mcqs:
             ques = MultipleChoiceQuestion.create(question=mcq['question'],
                                                  hints=mcq['hints'],
                                                  choices=mcq['choices'],
-                                                 correct=int(mcq['correct']))
+                                                 correct=int(mcq['correct'],
+                                                             score=question['score']))
             ques.save()
     return filename
