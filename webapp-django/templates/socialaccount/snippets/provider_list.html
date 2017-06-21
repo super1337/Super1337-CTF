@@ -28,6 +28,27 @@
 
 {% endifequal %}
 
+{% ifequal provider.name "Github" %}
+
+  <!-- <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="https://image.flaticon.com/icons/png/512/37/37409.png" width="32px"/></a> -->
+
+     <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
+        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="http://cdn.mysitemyway.com/icons-watermarks/flat-circle-white-on-dark-gray/social-media/social-media_facebook-square/social-media_facebook-square_flat-circle-white-on-dark-gray_128x128.png" width="40px"/></a>
+
+{% endifequal %}
+
+
+{% ifequal provider.name "Facebook" %}
+
+  <!-- <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="https://image.flaticon.com/icons/png/512/37/37409.png" width="32px"/></a> -->
+
+     <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
+        href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}"><img src="http://space-james.herokuapp.com/static/imgs/new-github.png" width="40px"/></a>
+
+{% endifequal %}
+
 
 <!-- <li>
   <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}} "
