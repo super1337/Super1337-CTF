@@ -12,12 +12,13 @@
 
 - For Those migrating from `python2.x` to `python3.x`, make sure to install the _requirements_ by following `step 4` of above.
 
-## Project Description
+# Project Description
 
 There are 3 [`apps`](https://docs.djangoproject.com/en/1.11/ref/applications/) in this _Django_ `project`.
 - _`questionnaire`_: This app will handle the part of the contest consisting of questions (normal or MCQ-type).
-- _`jeopadyctf`_: This app will handle the _jeopardy style CTF_ contests.
+- _`jeopardyctf`_: This app will handle the _jeopardy style CTF_ contests.
 - _`accounts`_: This app concerns with user profiles.
+- _`allauth`_: This is the app we're using for authentication, with social logins.
 
 We're using [_`django-allauth`_](https://www.intenct.nl/projects/django-allauth/) for authentication. _GitHub_, _Google_, and _Facebook_ has been added as '_social login_' providers.
 To explore it, visit the routes:
