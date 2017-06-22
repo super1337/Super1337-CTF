@@ -40,3 +40,7 @@ def upload2(request):
     return render(request, 'challenges/upload2.html', {
         'form': form
     })
+
+def textBased(request):
+    challenges = Challenge.objects.all()
+    return render(request, 'challenges/textBased.html', {'challenges': challenges})
