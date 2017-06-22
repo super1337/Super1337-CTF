@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+# import datetime
 
 
 class Tag(models.Model):
@@ -16,11 +17,11 @@ class Question(models.Model):
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
     tags = models.ManyToManyField(Tag)
-    score = models.IntegerField()
+    score = models.IntegerField(default=0)
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField(editable=False)
+    created = models.DateTimeField(editable=False,default=timezone.now)
+    modified = models.DateTimeField(editable=False,default=timezone.now)
 
     def save(self, *args, **kwargs):
         '''On save, update timestamps '''
