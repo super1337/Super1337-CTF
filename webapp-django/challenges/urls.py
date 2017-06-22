@@ -5,4 +5,5 @@ urlpatterns=[
     url(r'^$', views.index, name='index'),
     url(r'upload/', views.upload, name='upload'),
     url(r'upload2/', views.upload2, name='upload2'),
+    url(r'textBased/', views.textBased, name='textBased'),
 ]
