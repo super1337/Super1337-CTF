@@ -13,14 +13,17 @@
 
 </style>
 
+
 <div class="row">
-          <div class="col-lg-6 col-lg-offset-3">
+          <div class="col-lg-4 col-lg-offset-4">
             <div class="well bs-component">
 
 
 <h1>{% trans "Sign Up" %}</h1>
+<br>
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+<br>
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
