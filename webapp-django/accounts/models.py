@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(max_length=256, blank=True)
+    solved=models.CharField(solved=[],max_length=256)
 
     def __str__(self):
         return str(self.user.username)
