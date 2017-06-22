@@ -7,7 +7,7 @@ from .models import Challenge
 # from .forms import DocumentForm
 
 def download(req):
-    response = HttpResponse(FileWrapper(myfile.getvalue()), content_type='application/zip')
+    response = HttpResponse(content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename=myfile.zip'
     return response
 
