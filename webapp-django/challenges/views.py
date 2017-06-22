@@ -1,10 +1,6 @@
-from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from .models import Challenge
-
-
-# from .forms import DocumentForm
 
 
 def index(request):
@@ -18,6 +14,7 @@ def index(request):
     '''
 
 
+'''
 def upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
@@ -40,3 +37,4 @@ def upload2(request):
     return render(request, 'challenges/upload2.html', {
         'form': form
     })
+'''
