@@ -1,10 +1,15 @@
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-
+from django.http import HttpResponse
 from .models import Challenge
 
 
 # from .forms import DocumentForm
+
+def download(req):
+    response = HttpResponse(FileWrapper(myfile.getvalue()), content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename=myfile.zip'
+    return response
 
 
 def index(request):
