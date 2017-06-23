@@ -1,6 +1,5 @@
 import os
 
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
@@ -27,7 +26,7 @@ class Challenge(models.Model):
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
     score = models.IntegerField()
-    file = models.FilePathField(path=os.path.join(settings.BASE_DIR, 'challenges', 'files'), blank=True)
+    file = models.FileField(upload_to='challenges/', blank=True)
 
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
@@ -42,6 +41,9 @@ class Challenge(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(Challenge, self).save(*args, **kwargs)
+
+    def filename(self):
+        return os.path.basename(self.file.name)
 
     def __str__(self):
         return str(self.name)

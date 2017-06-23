@@ -29,10 +29,9 @@ def challenge(request, name):
         if form.is_valid():
             if form.cleaned_data['flag'] == chal.name:
                 pass
-        else:
-            form = FlagForm()
+    else:
+        form = FlagForm()
 
-    print(chal)
     return render(request, 'challenges/challenge.html', {'challenge': chal, 'form': form})
 
     '''
