@@ -6,39 +6,9 @@
 
 {% block content %}
     <div>
-        {% for challenge in challeges %}
+        {% for challenge in challenges %}
             {{ challenge.name }}:  {{ challenge.score }}
         {% endfor %}
-    </div>
-
-
-    <style>
-        .col-lg-2 {
-            text-Align: left !important;
-        }
-    </style>
-
-    <br><br><br><br><br>
-
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4">
-            <div class="well bs-component">
-                <form class="form-horizontal form-signin" method="post" action="/session/create">
-                    <fieldset>
-                        <legend>On-Going Contests</legend>
-
-                        <!-- <div class="form-group">
-                            <ul>
-                                {% for file in files %}
-                                    <li><a href="/media/{{ file }}">{{ file }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div> -->
-
-                    </fieldset>
-                </form>
-            </div>
-        </div>
     </div>
 
 
