@@ -22,10 +22,12 @@ class Challenge(models.Model):
     name = models.CharField(max_length=16, unique=True)
     problem = models.CharField(max_length=256)
     hints = models.CharField(max_length=256, blank=True)
-    tags = models.ManyToManyField(Tag)
-    score = models.IntegerField()
-    creators = models.ManyToManyField(User)
     flag = models.CharField(max_length=256)
+    score = models.IntegerField()
+    file = models.FilePathField()
+
+    tags = models.ManyToManyField(Tag)
+    creators = models.ManyToManyField(User)
 
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField(editable=False)
