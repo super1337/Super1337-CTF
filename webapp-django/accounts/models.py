@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -30,7 +31,11 @@ class UserProfile(models.Model):
     def save(self, *args, **kwargs):
         '''On save, update score '''
 
-        self.score = self.calculate_score()
+        if not self.id:
+            self.score = 0
+        else:
+            self.score = self.calculate_score()
+
         return super(UserProfile, self).save(*args, **kwargs)
 
 
@@ -39,4 +44,9 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
-    instance.userprofile.save()
+
+    try:
+        instance.userprofile.save()
+    except ObjectDoesNotExist:
+        UserProfile.objects.create(user=instance)
+        instance.userprofile.save()

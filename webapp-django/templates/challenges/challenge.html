@@ -1,0 +1,25 @@
+{% extends 'challenges/base.html' %}
+
+{% block title %}
+    {{ challenge.name }}: superleet CTF
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>{{ challenge.name }}</h2>
+        <p>
+            {{ challenge.problem }}
+        </p>
+        <p>File: <a href="{{ challenge.file.url }}">{{ challenge.filename }}</a></p>
+        <p>
+        <h4>Hints:</h4> {{ challenge.hints }}
+        </p>
+    </div>
+
+    <form action="/challenges/{{ challenge.name }}/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit"/>
+    </form>
+
+{% endblock %}
