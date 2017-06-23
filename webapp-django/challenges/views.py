@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .forms import FlagForm
 from .models import Challenge
 
 
@@ -22,9 +23,17 @@ def index(request):
 
 def challenge(request, name):
     chal = Challenge.objects.get(name=name)
-    print(chal)
-    return render(request, 'challenges/challenge.html', {'challenge': chal})
 
+    if request.method == 'POST':
+        form = FlagForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['flag'] == chal.name:
+                pass
+        else:
+            form = FlagForm()
+
+    print(chal)
+    return render(request, 'challenges/challenge.html', {'challenge': chal, 'form': form})
 
     '''
     path=settings.MEDIA_ROOT
