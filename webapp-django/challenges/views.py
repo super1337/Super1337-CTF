@@ -1,6 +1,15 @@
-from django.shortcuts import render
-
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import Challenge
+
+
+# from .forms import DocumentForm
+
+def download(req):
+    response = HttpResponse(content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename=myfile.zip'
+    return response
 
 
 def index(request):
@@ -14,7 +23,6 @@ def index(request):
     '''
 
 
-'''
 def upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
@@ -37,4 +45,7 @@ def upload2(request):
     return render(request, 'challenges/upload2.html', {
         'form': form
     })
-'''
+
+def textBased(request):
+    challenges = Challenge.objects.all()
+    return render(request, 'challenges/textBased.html', {'challenges': challenges})

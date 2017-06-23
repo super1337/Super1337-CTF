@@ -8,4 +8,4 @@
 
 ### Facebook
 - _Client ID_: `795053223986354`
-- _Clent Secret_: `0b5667fab4bb40980bfd479d91d4ebef`
+- _Client Secret_: `0b5667fab4bb40980bfd479d91d4ebef`

@@ -7,6 +7,10 @@ from django.dispatch import receiver
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(max_length=256, blank=True)
+    solvedChallenges=models.CharField(solved=[],max_length=256)
+    solvedQuestions=models.CharField(solved=[],max_length=256)
+    score = models.IntegerField(default=0)
+
 
     def __str__(self):
         return str(self.user.username)
