@@ -28,7 +28,7 @@ def challenge(request, name):
         form = FlagForm(request.POST)
         if form.is_valid():
             if form.cleaned_data['flag'] == chal.name:
-                pass
+                request.user.userprofile.solved_challenges = chal
     else:
         form = FlagForm()
 
