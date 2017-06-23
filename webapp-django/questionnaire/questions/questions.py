@@ -6,7 +6,7 @@ JSON_FILEPATH = 'questionnaire/questions/'
 JSON_FILENAME = 'questions.json'
 
 
-def addquestions(filename=JSON_FILEPATH+JSON_FILENAME):
+def addquestions(filename=JSON_FILEPATH + JSON_FILENAME):
     with open(filename) as jsonfile:
         quesjson = json.load(jsonfile)
         questions = quesjson['QUESTIONS']
@@ -20,10 +20,7 @@ def addquestions(filename=JSON_FILEPATH+JSON_FILENAME):
             ques.save()
 
         for mcq in mcqs:
-            ques = MultipleChoiceQuestion.create(question=mcq['question'],
-                                                 hints=mcq['hints'],
-                                                 choices=mcq['choices'],
-                                                 correct=int(mcq['correct'],
-                                                             score=question['score']))
+            ques = MultipleChoiceQuestion.create(question=mcq['question'], hints=mcq['hints'], choices=mcq['choices'],
+                                                 correct=int(mcq['correct']), score=mcq['score'])
             ques.save()
     return filename

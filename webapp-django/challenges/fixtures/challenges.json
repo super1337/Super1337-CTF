@@ -1,1 +1,133 @@
-[]
+[
+  {
+    "model": "challenges.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Forensics",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Cryptography",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Reverse Engineering",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 4,
+    "fields": {
+      "name": "Web Exploitation",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 5,
+    "fields": {
+      "name": "Binary Exploitation",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 6,
+    "fields": {
+      "name": "Miscellaneous",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 7,
+    "fields": {
+      "name": "Easy",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 8,
+    "fields": {
+      "name": "Medium",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 9,
+    "fields": {
+      "name": "Hard",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 10,
+    "fields": {
+      "name": "1337",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.tag",
+    "pk": 11,
+    "fields": {
+      "name": "n00b",
+      "description": ""
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 1,
+    "fields": {
+      "name": "simple-challenge",
+      "problem": "We found this random binary on the wild web, but legend says it has a flag hidden inside. Can you find it?",
+      "hints": "strings",
+      "flag": "6285A7C99BD039513BA3712D220634EA",
+      "score": 20,
+      "file": "C:\\Users\\Sumit\\OneDrive\\Coding\\SuperLeet-CTF\\webapp-django\\challenges\\files\\simple-challenge",
+      "created": "2017-06-23T06:07:00.998Z",
+      "modified": "2017-06-23T06:07:00.998Z",
+      "tags": [
+        3,
+        11
+      ],
+      "creators": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "challenges.challenge",
+    "pk": 2,
+    "fields": {
+      "name": "basic-challenge",
+      "problem": "As the hunt for flags continue in the wild wide web, we keep stumbling upon new and new artifacts. We found this one, and if the legends are true, it has a flag hidden inside.",
+      "hints": "",
+      "flag": "6006F2F2009D6FF71099FABD154C35C4",
+      "score": 10,
+      "file": "C:\\Users\\Sumit\\OneDrive\\Coding\\SuperLeet-CTF\\webapp-django\\challenges\\files\\basic-challenge",
+      "created": "2017-06-23T06:09:20.989Z",
+      "modified": "2017-06-23T06:09:20.989Z",
+      "tags": [
+        3,
+        5,
+        11
+      ],
+      "creators": [
+        1
+      ]
+    }
+  }
+]

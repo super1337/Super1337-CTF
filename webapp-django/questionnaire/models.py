@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-# import datetime
 
 
 class Tag(models.Model):
@@ -29,7 +28,7 @@ class Question(models.Model):
         if not self.id:
             self.created = timezone.now()
         self.modified = timezone.now()
-        return super(User, self).save(*args, **kwargs)
+        return super(Question, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(self.question)

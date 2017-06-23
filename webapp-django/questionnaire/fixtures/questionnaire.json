@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "model": "questionnaire.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Networking",
+      "description": ""
+    }
+  },
+  {
+    "model": "questionnaire.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Forensics",
+      "description": ""
+    }
+  },
+  {
+    "model": "questionnaire.question",
+    "pk": 1,
+    "fields": {
+      "question": "What is the full form of IP?",
+      "hints": "Seriously?!",
+      "answer": "Internet Protocol",
+      "score": 10,
+      "created": "2017-06-23T06:16:12.541Z",
+      "modified": "2017-06-23T06:21:54.435Z",
+      "tags": [
+        1
+      ],
+      "creators": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questionnaire.question",
+    "pk": 4,
+    "fields": {
+      "question": "What is the full form of IP?",
+      "hints": "Seriously?!",
+      "answer": "Internal Protocol",
+      "score": 10,
+      "created": "2017-06-23T06:19:07.118Z",
+      "modified": "2017-06-23T06:20:44.738Z",
+      "tags": [
+        1
+      ],
+      "creators": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questionnaire.simplequestion",
+    "pk": 1,
+    "fields": {
+      "tags": [
+        1
+      ],
+      "creators": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "questionnaire.multiplechoicequestion",
+    "pk": 4,
+    "fields": {
+      "choices": "[(0, 'Internet Programs'), (1, 'Internet Protocol'), (2, 'Internal Protocol'), (3, 'International Protocol')]",
+      "correct": 2,
+      "tags": [
+        1
+      ],
+      "creators": [
+        1
+      ]
+    }
+  }
+]
