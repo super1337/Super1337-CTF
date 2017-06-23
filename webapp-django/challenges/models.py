@@ -24,7 +24,7 @@ class Challenge(models.Model):
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
     score = models.IntegerField()
-    file = models.FilePathField()
+    file = models.FilePathField(blank=True)
 
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
