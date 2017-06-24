@@ -8,6 +8,9 @@ def index(request):
     challenges = Challenge.objects.all()
     return render(request, 'challenges/index.html', {'challenges': challenges})
 
+def tags(request):
+    pass
+
 
 def challenge(request, name):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
