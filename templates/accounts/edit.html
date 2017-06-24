@@ -5,22 +5,38 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <h2>Profile of {{ user.username }}</h2>
-    </div>
-    <div>
-        <form action="/user/{{ user.username }}/edit/" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit"/>
-        </form>
-    </div>
-    <div>
-        <ul>
-            <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-            <li><a href="/accounts/password/change">Change Password</a></li>
-            <li><a href="/accounts/social/connections">Edit Social Logins</a></li>
-        </ul>
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="well">
+
+            <form action="/user/{{ user.username }}/edit/" method="post" class="form-horizontal">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Profile of {{ user.username }}</legend>
+                    <div class="form-group">
+                        <label for="{{ form.bio.id_for_label }}" class="col-lg-1 control-label">Bio</label>
+                        <div class="col-lg-11">
+                            {{ form.bio }}
+                        </div>
+                    </div>
+                    <div class="col-lg-11 col-lg-offset-1">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </fieldset>
+
+            </form>
+            <br>
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-1">
+                    <div class="list-group">
+                        <a href="{% url 'account_email' %}" class="list-group-item">Change E-mail</a>
+                        <a href="/accounts/password/change" class="list-group-item">Change Password</a>
+                        <a href="/accounts/social/connections" class="list-group-item">Edit Social Logins</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
