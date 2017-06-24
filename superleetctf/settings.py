@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
 
+    'el_pagination',
+
     'accounts',
     'questionnaire',
     'challenges'
@@ -163,3 +165,7 @@ LOGIN_REDIRECT_URL = '/user/'
 # Email server settings
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# django-el-pagination settings
+
+EL_PAGINATION_PER_PAGE = 10
