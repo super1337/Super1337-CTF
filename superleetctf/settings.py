@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'el_pagination',
+    'widget_tweaks',
 
     'accounts',
     'questionnaire',
