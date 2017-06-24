@@ -12,9 +12,9 @@
         </p>
         <p>File: <a href="{{ challenge.file.url }}">{{ challenge.filename }}</a></p>
         <p>
-        {% if challenge.hints %}
-        <h4>Hints:</h4> {{ challenge.hints }}
-        {% endif %}
+            {% if challenge.hints %}
+                <p>Hints: {{ challenge.hints }}</p>
+            {% endif %}
         </p>
     </div>
 

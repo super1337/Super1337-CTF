@@ -9,16 +9,20 @@ def index(request):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     tagname = request.GET.get('tag')
 
+    sort = request.GET.get('sort')
+    if sort not in ['name', 'modified', 'created', 'score']:
+        sort = 'created'
+
     if tagname:
         try:
             tag = Tag.objects.get(name=tagname)
         except ObjectDoesNotExist:
             messages['info'].append('Tag {} does not exist! Showing all challenges instead.'.format(tagname))
-            challenges = Challenge.objects.all()
+            challenges = Challenge.objects.all().order_by(sort)
         else:
-            challenges = tag.challenge_set.all()
+            challenges = tag.challenge_set.all().order_by(sort)
     else:
-        challenges = Challenge.objects.all()
+        challenges = Challenge.objects.all().order_by(sort)
     return render(request, 'challenges/index.html', {'challenges': challenges, 'messages': messages})
 
 
