@@ -5,8 +5,13 @@
 {% endblock %}
 
 {% block content %}
-        {% for chal in solvedchals %}
-            <a href="/challenges/{{ chal.name }}">{{ chal.name }}</a>
-        {% endfor %}
-
+    {% if solvedchals %}
+        <ul>
+            {% for chal in solvedchals %}
+                <li><a href="/challenges/{{ chal.name }}">{{ chal.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No challenges solved by user.</p>
+    {% endif %}
 {% endblock %}

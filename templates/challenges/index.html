@@ -6,9 +6,11 @@
 
 {% block content %}
     <div>
-        {% for challenge in challenges %}
-            <a href="/challenges/{{ challenge.name }}">{{ challenge.name }}</a>:  {{ challenge.score }}
-        {% endfor %}
+        <ul>
+            {% for challenge in challenges %}
+                <li><a href="/challenges/{{ challenge.name }}">{{ challenge.name }}</a>: {{ challenge.score }}</li>
+            {% endfor %}
+        </ul>
     </div>
 
 
