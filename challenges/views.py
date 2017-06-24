@@ -23,6 +23,7 @@ def index(request):
             challenges = tag.challenge_set.all().order_by(sort)
     else:
         challenges = Challenge.objects.all().order_by(sort)
+
     return render(request, 'challenges/index.html', {'challenges': challenges, 'messages': messages})
 
 

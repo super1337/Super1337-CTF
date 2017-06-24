@@ -7,15 +7,48 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <ul>
-            {% paginate challenges %}
-            {% for challenge in challenges %}
-                <li><a href="/challenges/{{ challenge.name }}">{{ challenge.name }}</a>: {{ challenge.score }}</li>
-            {% endfor %}
-            {% show_pages %}
-        </ul>
-    </div>
 
+    <div class="container">
+        <div class="row">
+
+            <section class="content">
+                <h1>Challenges</h1>
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="table-container">
+                                <table class="table">
+                                    <tbody>
+                                    {% paginate challenges %}
+                                    {% for challenge in challenges %}
+                                        <tr>
+                                            <td>
+                                                {% if challenge in user.userprofile.solved_challenges.all %}
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                {% else %}
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                                {% endif %}
+                                            </td>
+
+                                            <td>
+                                                <h4>
+                                                    <a href="/challenges/{{ challenge.name }}">{{ challenge.name }}</a><span
+                                                        class="pull-right">{{ challenge.score }}</span></h4>
+                                                <p>{{ challenge.problem }}</p>
+                                                <p>{{ challenge.created }}</p>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    {% show_pages %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
 
 {% endblock %}
