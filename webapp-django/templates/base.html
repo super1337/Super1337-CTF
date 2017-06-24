@@ -71,6 +71,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
+                        <li>{{ user.userprofile.score }}</li>
                         <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
                         <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
                     {% else %}

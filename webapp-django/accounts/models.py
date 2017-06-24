@@ -12,8 +12,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     bio = models.TextField(max_length=256, blank=True)
 
-    solved_challenges = models.ManyToManyField(Challenge)
-    solved_questions = models.ManyToManyField(Question)
+    solved_challenges = models.ManyToManyField(Challenge, blank=True)
+    solved_questions = models.ManyToManyField(Question, blank=True)
     score = models.IntegerField(default=0, editable=False)
 
     def __str__(self):

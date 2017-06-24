@@ -23,6 +23,7 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^user/', include('accounts.urls')),
     url(r'^questionnaire/', include('questionnaire.urls')),
     url(r'^challenges/', include('challenges.urls')),
 

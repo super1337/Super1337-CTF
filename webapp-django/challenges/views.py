@@ -31,6 +31,7 @@ def challenge(request, name):
             if form.is_valid():
                 if form.cleaned_data['flag'] == chal.flag:
                     request.user.userprofile.solved_challenges.add(chal)
+                    request.user.userprofile.save()
                     messages['success'].append('You did it! You solved the challenge successfully!')
                 else:
                     messages['info'].append('Sorry! You got it wrong. Try harder')
