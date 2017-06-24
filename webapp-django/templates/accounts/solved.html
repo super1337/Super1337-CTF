@@ -1,0 +1,12 @@
+{% extends 'challenges/base.html' %}
+
+{% block title %}
+    {{ profile.user.username }}: superleet CTF
+{% endblock %}
+
+{% block content %}
+        {% for chal in solvedchals %}
+            <a href="/challenges/{{ chal.name }}">{{ chal.name }}</a>
+        {% endfor %}
+
+{% endblock %}

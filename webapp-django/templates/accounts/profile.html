@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <h2>{{ profile.user.username }}</h2>
-        <p>
-            {{ profile.bio }}
-        </p>
-        <a href="/user/{{ profile.user.username }}/solved">Solved Challenges</a>
-        <a href="/user/{{ profile.user.username }}/edit">Edit Profile</a>
-    </div>
+    {% if profile %}
+        <div>
+            <h2>{{ profile.user.username }}</h2>
+            <p>
+                {{ profile.bio }}
+            </p>
+            <a href="/user/{{ profile.user.username }}/solved">Solved Challenges</a>
+            <a href="/user/{{ profile.user.username }}/edit">Edit Profile</a>
+        </div>
+    {% endif %}
+
 
 {% endblock %}
