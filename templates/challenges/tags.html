@@ -1,0 +1,20 @@
+{% extends 'challenges/base.html' %}
+
+{% block title %}
+    Tags
+{% endblock %}
+
+{% block content %}
+    <div>
+        <ul>
+            {% for tag in tags %}
+                <li><a href="/challenges/?tag={{ tag.name }}">{{ tag.name }}</a>
+                    {% if tag.description %}
+                        :{{ tag.description }}</li>
+                    {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+{% endblock %}

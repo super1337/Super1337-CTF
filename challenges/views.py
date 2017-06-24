@@ -1,15 +1,30 @@
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import FlagForm
-from .models import Challenge
+from .models import Challenge, Tag
 
 
 def index(request):
-    challenges = Challenge.objects.all()
-    return render(request, 'challenges/index.html', {'challenges': challenges})
+    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+    tagname = request.GET.get('tag')
+
+    if tagname:
+        try:
+            tag = Tag.objects.get(name=tagname)
+        except ObjectDoesNotExist:
+            messages['info'].append('Tag {} does not exist! Showing all challenges instead.'.format(tagname))
+            challenges = Challenge.objects.all()
+        else:
+            challenges = tag.challenge_set.all()
+    else:
+        challenges = Challenge.objects.all()
+    return render(request, 'challenges/index.html', {'challenges': challenges, 'messages': messages})
+
 
 def tags(request):
-    pass
+    tags = Tag.objects.all()
+    return render(request, 'challenges/tags.html', {'tags': tags})
 
 
 def challenge(request, name):
