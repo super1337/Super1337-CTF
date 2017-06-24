@@ -1,4 +1,5 @@
 {% extends 'challenges/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}
     {{ user.username }}: superleet CTF
@@ -15,7 +16,7 @@
                     <div class="form-group">
                         <label for="{{ form.bio.id_for_label }}" class="col-lg-1 control-label">Bio</label>
                         <div class="col-lg-11">
-                            {{ form.bio }}
+                            {% render_field form.bio class="form-control" %}
                         </div>
                     </div>
                     <div class="col-lg-11 col-lg-offset-1">
