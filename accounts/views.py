@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from .forms import UserProfileForm
+
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -19,6 +21,24 @@ def profile(request, username):
         messages['warning'].append('The user {} does not exist!'.format(username))
 
     return render(request, 'accounts/profile.html', {'profile': request.user.userprofile, 'messages': messages})
+
+
+@login_required(login_url='/accounts/login/')
+def edit(request, username):
+    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+
+    if not request.user.username == username:
+        messages['danger'].append('You cannot edit the profile of user {}!'.format(username))
+        messages['info'].append('Loading your user profile instead.')
+
+    profile = request.user.userprofile
+    form = UserProfileForm(request.POST or None, instance=profile)
+
+    if form.is_valid():
+        messages['success'].append('You updated your profile successfully!')
+        form.save()
+
+    return render(request, 'accounts/edit.html', {'form': form, 'messages': messages})
 
 
 def solved(request, username):

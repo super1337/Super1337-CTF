@@ -1,0 +1,26 @@
+{% extends 'challenges/base.html' %}
+
+{% block title %}
+    {{ user.username }}: superleet CTF
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Profile of {{ user.username }}</h2>
+    </div>
+    <div>
+        <form action="/user/{{ user.username }}/edit/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+    <div>
+        <ul>
+            <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+            <li><a href="/accounts/password/change">Change Password</a></li>
+            <li><a href="/accounts/social/connections">Edit Social Logins</a></li>
+        </ul>
+    </div>
+
+{% endblock %}
