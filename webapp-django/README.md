@@ -5,9 +5,13 @@
 1. Clone the repo: `https://github.com/Ayush21298/SuperLeet-CTF.git`
 2. `cd` to the _Django_ project directory: `cd SuperLeet-CTF/webapp-django/`
 3. Install _requirements_: `pip3 install -r requirements.txt`
-4. _Migrate_ the database: `python3 manage.py migrate`
-5. Go to the Admin panel and add the _OAuth_ credentials to the database.
-6. Run the server: `python3 manage.py runserver`
+4. Run the server: `python3 manage.py runserver`
+
+## Credentials
+
+Admin credentials are
+- _username_ - `iitdelhi`
+- _password_ - `superleetctf`
 
 ## Troubleshoot
 
@@ -44,6 +48,6 @@ By default is assumes the input `JSON` file is `questionnaire/questions/question
 - [x] Add `django-allauth` to project.
 - [x] Add _social logins_ to the project.
 - [x] Create core functionalities for the `questionnaire` app.
-- [ ] Create scoring system for `questionnaire`.
-- [ ] Complete `questionnaire` by making `routes`, `views` and `templates`.
-- [ ] Make `models` and basic backbone for _jeopardy-style challenges_.
+- [x] Create scoring system for `questionnaire`.
+- [x] Complete `questionnaire` by making `routes`, `views` and `templates`.
+- [x] Make `models` and basic backbone for _jeopardy-style challenges_.
