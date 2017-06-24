@@ -168,4 +168,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # django-el-pagination settings
 
-EL_PAGINATION_PER_PAGE = 10
+EL_PAGINATION_PER_PAGE = 1
