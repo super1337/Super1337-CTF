@@ -63,7 +63,7 @@
                         <li><a href="/user/{{ user.username }}">{{ user.username }} <span
                                 class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             {{ user.userprofile.score }}</a></li>
-                        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#signoutmodal">Sign Out</a></li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">Sign In</a></li>
                         <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
@@ -72,6 +72,29 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+
+    <div id="signoutmodal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h2 class="modal-title">Sign Out</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to sign out?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="post" action="/accounts/logout/" class="form-horizontal">
+                        {% csrf_token %}
+                        <fieldset>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Sign Out</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Messages or alerts shown as bootstrap alerts -->
