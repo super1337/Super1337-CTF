@@ -10,9 +10,18 @@ class Tag(models.Model):
     def __str__(self):
         return str(self.name)
 
+class Quiz(models.Model):
+    name = models.CharField(max_length=256, unique=True)
+    description = models.CharField(max_length=256, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    def __str__(self):
+        return str(self.name)
+
+
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
     tags = models.ManyToManyField(Tag)
@@ -41,6 +50,7 @@ class SimpleQuestion(Question):
 class MultipleChoiceQuestion(Question):
     choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
+
 
     @classmethod
     def create(cls, question, hints, choices, correct, score):
