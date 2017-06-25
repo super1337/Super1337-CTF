@@ -64,6 +64,7 @@ class MultipleChoiceQuestion(Question):
         mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score)
         return mcq
 
+# handles auto update of tags of quiz (basic version (uupdated question can also be handled through this))
 @receiver(post_save, sender=SimpleQuestion)
 def updatetags_onsave(sender, instance, **kwargs):
     relevent_quiz = instance.quiz
