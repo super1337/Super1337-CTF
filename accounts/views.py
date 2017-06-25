@@ -52,4 +52,5 @@ def solved(request, username):
     else:
         solvedchals = user.userprofile.solved_challenges.all()
 
-    return render(request, 'accounts/solved.html', {'solvedchals': solvedchals, 'messages': messages})
+    return render(request, 'accounts/solved.html',
+                  {'solvedchals': solvedchals, 'messages': messages, 'username': username})
