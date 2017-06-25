@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
+# signal handlers
+from django.dispatch import receiver
+from django.db.models.signals import post_save, m2m_changed, post_delete
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=256, unique=True)
@@ -13,7 +17,8 @@ class Tag(models.Model):
 class Quiz(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True) # autoupdated
+    
     def __str__(self):
         return str(self.name)
 
@@ -58,3 +63,14 @@ class MultipleChoiceQuestion(Question):
         answer = CHOICES[correct][1]
         mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score)
         return mcq
+
+@receiver(post_save, sender=SimpleQuestion)
+def updatetags_onsave(sender, instance, **kwargs):
+    relevent_quiz = instance.quiz
+    print(instance.tags.all())
+    print(instance.quiz)
+    print(instance.quiz.tags.all())
+    for tag in instance.tags.all():
+        if tag not in relevent_quiz.tags.all():
+            relevent_quiz.tags.add(tag)
+    print(instance.quiz.tags.all())
