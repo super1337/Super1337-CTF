@@ -10,26 +10,27 @@ class Tag(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Quiz(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
+
     def __str__(self):
         return str(self.name)
 
 
-
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField(default=0)
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(editable=False,default=timezone.now)
-    modified = models.DateTimeField(editable=False,default=timezone.now)
+    created = models.DateTimeField(editable=False, default=timezone.now)
+    modified = models.DateTimeField(editable=False, default=timezone.now)
 
     def save(self, *args, **kwargs):
         '''On save, update timestamps '''
@@ -50,7 +51,6 @@ class SimpleQuestion(Question):
 class MultipleChoiceQuestion(Question):
     choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
-
 
     @classmethod
     def create(cls, question, hints, choices, correct, score):
