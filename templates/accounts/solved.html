@@ -7,7 +7,7 @@
 
 {% block content %}
 
-        <div class="container">
+    <div class="container">
 
         <section class="content">
             <div class="col-md-8 col-md-offset-2">
@@ -18,27 +18,25 @@
                     <div class="panel-body">
                         <div class="list-group">
                             {% paginate solvedchals %}
-                            {% if solvedchals %}
-                                {% for challenge in solvedchals %}
-                                    <a href="/challenges/{{ challenge.name }}" class="list-group-item">
-                                        <h3 class="list-group-item-heading">
-                                            {% if challenge in user.userprofile.solved_challenges.all %}
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            {% else %}
-                                                <span class="glyphicon glyphicon-star-empty"></span>
-                                            {% endif %}
-                                            {{ challenge.name }}
-                                            <span class="pull-right">{{ challenge.score }}</span></h4>
-                                        </h3>
-                                        <div class="list-group-item-text">
-                                            <p>{{ challenge.problem }}</p>
-                                            <p>{{ challenge.created }}</p>
-                                        </div>
-                                    </a>
-                                {% endfor %}
-                            {% else %}
+                            {% for challenge in solvedchals %}
+                                <a href="/challenges/{{ challenge.name }}" class="list-group-item">
+                                    <h3 class="list-group-item-heading">
+                                        {% if challenge in user.userprofile.solved_challenges.all %}
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        {% else %}
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                        {% endif %}
+                                        {{ challenge.name }}
+                                        <span class="pull-right">{{ challenge.score }}</span></h4>
+                                    </h3>
+                                    <div class="list-group-item-text">
+                                        <p>{{ challenge.problem }}</p>
+                                        <p>{{ challenge.created }}</p>
+                                    </div>
+                                </a>
+                            {% empty %}
                                 <p class="text-info">User {{ username }} solved no challenge.</p>
-                            {% endif %}
+                            {% endfor %}
 
                             {% get_pages %}
                             <div class="text-center">

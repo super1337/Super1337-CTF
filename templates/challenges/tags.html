@@ -17,19 +17,17 @@
                     <div class="panel-body">
                         <div class="list-group">
                             {% paginate tags %}
-                            {% if tags %}
-                                {% for tag in tags %}
-                                    <a href="/challenges/?tag={{ tag.name }}" class="list-group-item">
-                                        <h4 class="list-group-item-heading">
-                                             <span class="glyphicon glyphicon-tags"></span>
-                                            {{ tag.name }}
-                                            <span class="pull-right">x{{ tag.challenge_set.count }}</span></h4>
-                                        </h4>
-                                    </a>
-                                {% endfor %}
-                            {% else %}
+                            {% for tag in tags %}
+                                <a href="/challenges/?tag={{ tag.name }}" class="list-group-item">
+                                    <h4 class="list-group-item-heading">
+                                        <span class="glyphicon glyphicon-tags"></span>
+                                        {{ tag.name }}
+                                        <span class="pull-right">x{{ tag.challenge_set.count }}</span></h4>
+                                    </h4>
+                                </a>
+                            {% empty %}
                                 <p class="text-info">Sorry! No Tags found!</p>
-                            {% endif %}
+                            {% endfor %}
 
                             {% get_pages %}
                             <div class="text-center">
