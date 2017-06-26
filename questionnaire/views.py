@@ -1,19 +1,27 @@
-from itertools import chain
-
 from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import SimpleQuestion, MultipleChoiceQuestion
+from .models import Quiz
 
 
 def index(request):
-    return render(request,'questionnaire/index.html',{})
-
-def contest(request):
-    return render(request,'questionnaire/contest.html',{})
+    quizzes = Quiz.objects.all()
+    return render(request, 'questionnaire/index.html', {'quizzes': quizzes})
 
 
-def questions(request):
-    questions = list(chain(SimpleQuestion.objects.all(), MultipleChoiceQuestion.objects.all()))
-    print(questions)
+def quiz(request, name):
+    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
 
-    return render(request, 'questionnaire/questions.html', {'questions': questions})
+    sort = request.GET.get('sort')
+    if sort not in ['name', 'modified', 'created', 'score']:
+        sort = 'created'
+
+    try:
+        quiz = Quiz.objects.get(name=name)
+    except ObjectDoesNotExist:
+        messages['danger'].append('The quiz {} does not exist!'.format(name))
+        questions = []
+    else:
+        questions = quiz.question_set.all()
+
+    return render(request, 'challenges/index.html', {'questions': questions, 'messages': messages})

@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
-
+from django.db.models.signals import post_save
 # signal handlers
 from django.dispatch import receiver
-from django.db.models.signals import post_save, m2m_changed, post_delete
+from django.utils import timezone
 
 
 class Tag(models.Model):
@@ -14,14 +13,15 @@ class Tag(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Quiz(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True) # autoupdated
-    
+    tags = models.ManyToManyField(Tag, blank=True, editable=False)
+    score = models.IntegerField(editable=False)
+
     def __str__(self):
         return str(self.name)
-
 
 
 class Question(models.Model):
@@ -33,8 +33,8 @@ class Question(models.Model):
     score = models.IntegerField(default=0)
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(editable=False,default=timezone.now)
-    modified = models.DateTimeField(editable=False,default=timezone.now)
+    created = models.DateTimeField(editable=False, default=timezone.now)
+    modified = models.DateTimeField(editable=False, default=timezone.now)
 
     def save(self, *args, **kwargs):
         '''On save, update timestamps '''
@@ -56,7 +56,6 @@ class MultipleChoiceQuestion(Question):
     choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
 
-
     @classmethod
     def create(cls, question, hints, choices, correct, score):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
@@ -64,14 +63,15 @@ class MultipleChoiceQuestion(Question):
         mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score)
         return mcq
 
-# handles auto update of tags of quiz (basic version (uupdated question can also be handled through this))
+
+# Handles auto update of tags and score of quiz
 @receiver(post_save, sender=SimpleQuestion)
-def updatetags_onsave(sender, instance, **kwargs):
-    relevent_quiz = instance.quiz
+@receiver(post_save, sender=MultipleChoiceQuestion)
+def updatequiz(sender, instance, **kwargs):
     print(instance.tags.all())
     print(instance.quiz)
     print(instance.quiz.tags.all())
     for tag in instance.tags.all():
-        if tag not in relevent_quiz.tags.all():
-            relevent_quiz.tags.add(tag)
+        if tag not in instance.quiz.tags.all():
+            instance.quiz.tags.add(tag)
     print(instance.quiz.tags.all())
