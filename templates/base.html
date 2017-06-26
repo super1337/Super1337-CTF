@@ -111,7 +111,14 @@
             {% endfor %}
         {% endif %}
 
-        {% block content %}{% endblock %}
+
+        <div class="container">
+            <section class="content">
+                <div class="col-md-8 col-md-offset-2">
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </div>
 
     </div> <!-- /container -->
 

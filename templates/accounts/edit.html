@@ -6,38 +6,35 @@
 {% endblock %}
 
 {% block content %}
-    <div class="col-lg-8 col-lg-offset-2">
-        <div class="well">
+    <div class="well">
 
-            <form action="/user/{{ user.username }}/edit/" method="post" class="form-horizontal">
-                {% csrf_token %}
-                <fieldset>
-                    <legend>Profile of {{ user.username }}</legend>
-                    <div class="form-group">
-                        <label for="{{ form.bio.id_for_label }}" class="col-lg-1 control-label">Bio</label>
-                        <div class="col-lg-11">
-                            {% render_field form.bio class="form-control" %}
-                        </div>
+        <form action="/user/{{ user.username }}/edit/" method="post" class="form-horizontal">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Profile of {{ user.username }}</legend>
+                <div class="form-group">
+                    <label for="{{ form.bio.id_for_label }}" class="col-lg-1 control-label">Bio</label>
+                    <div class="col-lg-11">
+                        {% render_field form.bio class="form-control" %}
                     </div>
-                    <div class="col-lg-11 col-lg-offset-1">
-                        <button type="reset" class="btn btn-default">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </fieldset>
+                </div>
+                <div class="col-lg-11 col-lg-offset-1">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </fieldset>
 
-            </form>
-            <br>
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-1">
-                    <div class="list-group">
-                        <a href="{% url 'account_email' %}" class="list-group-item">Change E-mail</a>
-                        <a href="/accounts/password/change" class="list-group-item">Change Password</a>
-                        <a href="/accounts/social/connections" class="list-group-item">Edit Social Logins</a>
-                    </div>
+        </form>
+        <br>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-1">
+                <div class="list-group">
+                    <a href="{% url 'account_email' %}" class="list-group-item">Change E-mail</a>
+                    <a href="/accounts/password/change" class="list-group-item">Change Password</a>
+                    <a href="/accounts/social/connections" class="list-group-item">Edit Social Logins</a>
                 </div>
             </div>
         </div>
-
     </div>
 
 {% endblock %}
