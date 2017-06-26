@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from challenges.models import Challenge
-from questionnaire.models import Question
+from questionnaire.models import Quiz
 
 
 class UserProfile(models.Model):
@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     bio = models.TextField(max_length=256, blank=True)
 
     solved_challenges = models.ManyToManyField(Challenge, blank=True)
-    solved_questions = models.ManyToManyField(Question, blank=True)
+    attempted_quizzes = models.ManyToManyField(Quiz, blank=True)
     score = models.IntegerField(default=0, editable=False)
 
     def __str__(self):

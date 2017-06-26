@@ -13,7 +13,8 @@ def quiz(request, name):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
 
     sort = request.GET.get('sort')
-    if sort not in ['name', 'modified', 'created', 'score']:
+    if sort not in ['modified', 'created', 'score']:
+        messages['info'].append('Cannot sort by {}! Sorting by \'created\' instead.!'.format(name))
         sort = 'created'
 
     try:
@@ -21,6 +22,7 @@ def quiz(request, name):
     except ObjectDoesNotExist:
         messages['danger'].append('The quiz {} does not exist!'.format(name))
         questions = []
+
     else:
         questions = quiz.question_set.all()
 

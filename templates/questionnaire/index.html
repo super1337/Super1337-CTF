@@ -1,35 +1,96 @@
-{% extends 'base.html' %}
+{% extends 'questionnaire/base.html' %}
+{% load el_pagination_tags %}
 
-{% block head_title %}
-Contests
+
+{% block title %}
+    Questionnaire
 {% endblock %}
 
 {% block content %}
 
-<style>
-.col-lg-2 {
-   text-Align:left !important;
-}
 
-</style>
-<br><br><br><br><br>
-<div class="row">
-          <div class="col-lg-4 col-lg-offset-4">
-            <div class="well bs-component">
-              <form class="form-horizontal form-signin" method="post" action="/session/create">
-                <fieldset>
-                  <legend>On-Going Contests</legend>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1>Questionnaire</h1>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                {% paginate quizzes %}
+                {% for quiz in quizzes %}
+                    <a href="/challenges/{{ quiz.name }}" class="list-group-item">
+                        <h3 class="list-group-item-heading">
+                            {% if quiz in user.userprofile.attempted_quizzes.all %}
+                                <span class="glyphicon glyphicon-star"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            {% endif %}
+                            {{ quiz.name }}
+                            <span class="pull-right">{{ quiz.score }}</span></h4>
+                        </h3>
+                        <div class="list-group-item-text">
+                            <p>{{ quiz.problem }}</p>
+                            <p>{{ quiz.created }}</p>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="text-info">Sorry! No quizzes found!</p>
+                {% endfor %}
 
-                  <div class="form-group">
-                    <ul>
-                    <li><a href="/questionnaire/contest/round1">Round 1</a></li>
-                    <li><a href="/questionnaire/contest/round1">Round 2</a></li>
-                    </div>
+                {% get_pages %}
+                <div class="text-center">
+                    <ul class="pagination">
+                        {% if pages.paginated %}
 
-                </fieldset>
-              </form>
+                            <li class="page-item">
+                                <a class="page-link" href="{{ pages.first.path }}" aria-label="First">
+                                    <span aria-hidden="true">&lt;&lt;</span>
+                                    <span class="sr-only">First</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="{{ pages.previous.path }}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&lt;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+
+                            {% for page in pages %}
+                                {% if page == None %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" aria-label="...">
+                                            <span aria-hidden="true">...</span>
+                                            <span class="sr-only">...</span>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item {% if page.is_current %} active {% endif %}">
+                                        <a class="page-link" href="{{ page.path }}"
+                                           aria-label="Page {{ page.number }}">
+                                            <span aria-hidden="true">{{ page.label|safe }}</span>
+                                            <span class="sr-only">Page {{ page.number }}</span>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ pages.next.path }}" aria-label="Next">
+                                    <span aria-hidden="true">&gt;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="{{ pages.last.path }}" aria-label="Last">
+                                    <span aria-hidden="true">&gt;&gt;</span>
+                                    <span class="sr-only">Last</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-          </div>
-</div>
+        </div>
+    </div>
+
 
 {% endblock %}
