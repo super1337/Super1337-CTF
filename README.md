@@ -51,3 +51,5 @@ By default is assumes the input `JSON` file is `questionnaire/questions/question
 - [x] Create scoring system for `questionnaire`.
 - [x] Complete `questionnaire` by making `routes`, `views` and `templates`.
 - [x] Make `models` and basic backbone for _jeopardy-style challenges_.
+- [] Add time based contests system.
+- [] Add questions on the website.
