@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^user/', include('accounts.urls')),
     url(r'^questionnaire/', include('questionnaire.urls')),
     url(r'^challenges/', include('challenges.urls')),
+    url(r'^mega/', include('mega_challenge.urls')),
 
     url(r'^$', views.index, name='index')
 ]
