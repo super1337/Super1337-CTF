@@ -18,7 +18,7 @@ class Quiz(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag, blank=True, editable=False)
-    score = models.IntegerField(editable=False)
+    score = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
         return str(self.name)

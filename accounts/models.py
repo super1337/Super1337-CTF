@@ -23,8 +23,8 @@ class UserProfile(models.Model):
         score = 0
         for chal in self.solved_challenges.all():
             score = score + chal.score
-        for ques in self.solved_questions.all():
-            score = score + ques.score
+        # for ques in self.solved_questions.all():
+        #     score = score + ques.score
 
         return score
 

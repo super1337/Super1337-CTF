@@ -1,5 +1,6 @@
 from django.contrib import admin
 
-from .models import Tag, Challenge
+from .models import Tag, Challenge, ChallengeAdmin
 
-admin.site.register([Tag, Challenge])
+admin.site.register(Challenge, ChallengeAdmin)
+admin.site.register(Tag)

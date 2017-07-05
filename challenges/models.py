@@ -1,5 +1,6 @@
 import os
 
+from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
@@ -40,3 +41,10 @@ class Challenge(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class ChallengeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'score', 'modified', 'created')
+    search_fields = ('name', 'problem')
+    list_filter = ('tags', 'score', 'modified', 'created', 'creators')
+    ordering = ['name', 'score', 'creators', 'modified', 'created']
