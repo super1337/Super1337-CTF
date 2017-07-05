@@ -25,16 +25,16 @@ class Challenge(models.Model):
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField(editable=False)
+    created = models.DateTimeField(auto_now=True)
+    modified = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        '''On save, update timestamps '''
-
-        if not self.id:
-            self.created = timezone.now()
-        self.modified = timezone.now()
-        return super(Challenge, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     '''On save, update timestamps '''
+    #
+    #     if not self.id:
+    #         self.created = timezone.now()
+    #     self.modified = timezone.now()
+    #     return super(Challenge, self).save(*args, **kwargs)
 
     def filename(self):
         return os.path.basename(self.file.name)
