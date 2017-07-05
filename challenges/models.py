@@ -46,5 +46,6 @@ class Challenge(models.Model):
 class ChallengeAdmin(admin.ModelAdmin):
     list_display = ('name', 'score', 'modified', 'created')
     search_fields = ('name', 'problem')
+    raw_id_fields = ('creators',)
     list_filter = ('tags', 'score', 'modified', 'created', 'creators')
     ordering = ['name', 'score', 'creators', 'modified', 'created']
