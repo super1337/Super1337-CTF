@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'accounts',
     'questionnaire',
     'challenges'
+    'contests'
 ]
 
 MIDDLEWARE = [

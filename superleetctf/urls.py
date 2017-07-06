@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^user/', include('accounts.urls')),
+
+    url(r'^contests/', include('contests.urls')),
     url(r'^questionnaire/', include('questionnaire.urls')),
     url(r'^challenges/', include('challenges.urls')),
     url(r'^mega/', include('mega_challenge.urls')),

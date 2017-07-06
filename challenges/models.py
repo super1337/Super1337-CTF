@@ -25,8 +25,8 @@ class Challenge(models.Model):
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(auto_now=True)
-    modified = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     # def save(self, *args, **kwargs):
     #     '''On save, update timestamps '''
