@@ -5,9 +5,18 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    description = models.CharField(max_length=512, blank=True)
+
+    def __str__(self):
+        return str(self.name)
+
+
 class Contest(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    description = models.TextField()
+    name = models.CharField(max_length=64, unique=True)
+    description = models.TextField(blank=False)
+    tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
 
     created = models.DateTimeField(auto_now_add=True)

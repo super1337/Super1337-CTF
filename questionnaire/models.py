@@ -5,18 +5,10 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib import admin
 
-from contests.models import Contest
+from contests.models import Contest, Tag
 
 # signal handlers
 from django.dispatch import receiver
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=256, unique=True)
-    description = models.CharField(max_length=256, blank=True)
-
-    def __str__(self):
-        return str(self.name)
 
 
 class Quiz(models.Model):
@@ -25,6 +17,8 @@ class Quiz(models.Model):
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField(editable=False) # make it dependent on problems contained or some final normalized score
 
+    DIFF_CHOICES = ((1, 'n00b'), (2, 'Easy'), (3, 'Medium'), (4, 'Hard'), (5, '1337'))
+    difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True)
     creators = models.ManyToManyField(User)
 
@@ -39,9 +33,9 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     hints = models.CharField(max_length=256, blank=True)
-    answer = models.CharField(max_length=256)
+    answer = models.CharField(max_length=256) # maybe during checking and/or while save compare both small/capitalized texts
 
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField()

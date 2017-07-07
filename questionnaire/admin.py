@@ -5,4 +5,4 @@ from .models import Quiz, SimpleQuestion, MCQ, Tag, QuizAdmin, SimpleQuestionAdm
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(SimpleQuestion, SimpleQuestionAdmin)
 admin.site.register(MCQ, MCQAdmin)
-admin.site.register(Tag)
+
