@@ -18,7 +18,7 @@ class Quiz(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag, blank=True, editable=False)
-    score = models.IntegerField(editable=False, null=True)
+    score = models.IntegerField(editable=False, null=True) # make it dependent on problems contained or some final normalized score
 
     def __str__(self):
         return str(self.name)
@@ -29,20 +29,23 @@ class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
+
     tags = models.ManyToManyField(Tag)
-    score = models.IntegerField(default=0)
+    score = models.IntegerField()
     creators = models.ManyToManyField(User)
 
-    created = models.DateTimeField(editable=False, default=timezone.now)
-    modified = models.DateTimeField(editable=False, default=timezone.now)
+    hidden = models.BooleanField(default=True)
 
-    def save(self, *args, **kwargs):
-        '''On save, update timestamps '''
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
-        if not self.id:
-            self.created = timezone.now()
-        self.modified = timezone.now()
-        return super(Question, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     '''On save, update timestamps '''
+    #
+    #     if not self.id:
+    #         self.created = timezone.now()
+    #     self.modified = timezone.now()
+    #     return super(Question, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(self.question)

@@ -19,11 +19,13 @@ class Challenge(models.Model):
     problem = models.CharField(max_length=256)
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
-    score = models.IntegerField()
     file = models.FileField(upload_to='challenges/', blank=True)
-
+    
+    score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
+
+    hidden = models.BooleanField(default=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
