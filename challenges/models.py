@@ -16,7 +16,7 @@ class Tag(models.Model):
 
 
 class Challenge(models.Model):
-    name = models.CharField(max_length=16, unique=True)
+    name = models.CharField(max_length=50, unique=True)
     problem = models.CharField(max_length=256)
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
