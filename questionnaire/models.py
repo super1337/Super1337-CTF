@@ -11,7 +11,6 @@ from contests.models import Contest
 from django.dispatch import receiver
 
 
-
 class Tag(models.Model):
     name = models.CharField(max_length=256, unique=True)
     description = models.CharField(max_length=256, blank=True)
@@ -23,9 +22,16 @@ class Tag(models.Model):
 class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=256, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True, editable=False)
-    score = models.IntegerField(editable=False, null=True) # make it dependent on problems contained or some final normalized score
+    tags = models.ManyToManyField(Tag)
+    score = models.IntegerField(editable=False) # make it dependent on problems contained or some final normalized score
+
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True)
+    creators = models.ManyToManyField(User)
+
+    hidden = models.BooleanField(default=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.name)
@@ -33,13 +39,12 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
 
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField()
-    creators = models.ManyToManyField(User)
 
     hidden = models.BooleanField(default=True)
 
@@ -62,7 +67,7 @@ class SimpleQuestion(Question):
     pass
 
 
-class MultipleChoiceQuestion(Question):
+class MCQ(Question):
     choices = models.CharField(choices=[], max_length=256)
     correct = models.IntegerField()
 
@@ -75,20 +80,36 @@ class MultipleChoiceQuestion(Question):
 
 
 # Handles auto update of tags and score of quiz
-@receiver(post_save, sender=SimpleQuestion)
-@receiver(post_save, sender=MultipleChoiceQuestion)
-def updatequiz(sender, instance, **kwargs):
-    print(instance.tags.all())
-    print(instance.quiz)
-    print(instance.quiz.tags.all())
-    for tag in instance.tags.all():
-        if tag not in instance.quiz.tags.all():
-            instance.quiz.tags.add(tag)
-    print(instance.quiz.tags.all())
+# @receiver(post_save, sender=SimpleQuestion)
+# @receiver(post_save, sender=MCQ)
+# def updatequiz(sender, instance, **kwargs):
+#     print(instance.tags.all())
+#     print(instance.quiz)
+#     print(instance.quiz.tags.all())
+#     for tag in instance.tags.all():
+#         if tag not in instance.quiz.tags.all():
+#             instance.quiz.tags.add(tag)
+#     print(instance.quiz.tags.all())
+
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('quiz', 'question', 'score', 'hidden', 'created', 'modified')
     search_fields = ('quiz', 'question')
+    list_filter = ('tags', 'score', 'modified', 'created')
+    ordering = ['score', 'modified', 'created']
+
+
+class SimpleQuestionAdmin(QuestionAdmin):
+    pass
+
+
+class MCQAdmin(QuestionAdmin):
+    pass
+
+
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ('name', 'score', 'contest')
+    search_fields = ('name', 'description', 'contest')
     raw_id_fields = ('creators',)
     list_filter = ('tags', 'score', 'modified', 'created', 'creators')
-    ordering = ['score', 'creators', 'modified', 'created']
+    ordering = ['name', 'score', 'creators', 'modified', 'created']

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import SimpleQuestion, MultipleChoiceQuestion
+from .models import SimpleQuestion, MCQ
 
 
 class SimpleQuestionForm(forms.ModelForm):
@@ -9,7 +9,7 @@ class SimpleQuestionForm(forms.ModelForm):
         fields = ('question', 'hints', 'answer')
 
 
-class MultipleChoiceQuestionForm(forms.ModelForm):
+class MCQ(forms.ModelForm):
     class Meta:
-        model = MultipleChoiceQuestion
+        model = MCQ
         fields = ('question', 'hints', 'answer', 'choices', 'correct')

@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'questionnaire',
-    'challenges'
+    'challenges',
     'contests'
 ]
 
