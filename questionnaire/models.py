@@ -39,7 +39,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
 
