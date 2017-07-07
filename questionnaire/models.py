@@ -1,9 +1,15 @@
-from django.contrib.auth.models import User
+from django.utils import timezone
 from django.db import models
 from django.db.models.signals import post_save
+
+from django.contrib.auth.models import User
+from django.contrib import admin
+
+from contests.models import Contest
+
 # signal handlers
 from django.dispatch import receiver
-from django.utils import timezone
+
 
 
 class Tag(models.Model):
@@ -15,10 +21,11 @@ class Tag(models.Model):
 
 
 class Quiz(models.Model):
-    name = models.CharField(max_length=256, unique=True)
+    name = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag, blank=True, editable=False)
     score = models.IntegerField(editable=False, null=True) # make it dependent on problems contained or some final normalized score
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.name)
@@ -78,3 +85,10 @@ def updatequiz(sender, instance, **kwargs):
         if tag not in instance.quiz.tags.all():
             instance.quiz.tags.add(tag)
     print(instance.quiz.tags.all())
+
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('quiz', 'question', 'score', 'hidden', 'created', 'modified')
+    search_fields = ('quiz', 'question')
+    raw_id_fields = ('creators',)
+    list_filter = ('tags', 'score', 'modified', 'created', 'creators')
+    ordering = ['score', 'creators', 'modified', 'created']

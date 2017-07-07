@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from contests.models import Contest
 
 
 class Tag(models.Model):
@@ -24,6 +25,7 @@ class Challenge(models.Model):
     score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True)
 
     hidden = models.BooleanField(default=True)
 
@@ -46,7 +48,7 @@ class Challenge(models.Model):
 
 
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'score', 'modified', 'created')
+    list_display = ('name', 'score', 'contest', 'modified', 'created')
     search_fields = ('name', 'problem')
     raw_id_fields = ('creators',)
     list_filter = ('tags', 'score', 'modified', 'created', 'creators')
