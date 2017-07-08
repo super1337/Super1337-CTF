@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib import admin
 
 # Create your models here.
 
@@ -26,3 +27,18 @@ class Contest(models.Model):
 
     STATE_CHOICES = ((1, 'Not Started'), (2, 'Ongoing'), (3, 'Ended'))
     state = models.CharField(max_length=15, choices=STATE_CHOICES, default=1)
+
+
+class ContestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'start_time', 'end_time', 'modified', 'created')
+    search_fields = ('name', )
+    raw_id_fields = ('creators',)
+    readonly_fields = ('state',)
+    list_filter = ('tags', 'state', 'created', 'creators')
+    ordering = ['name', 'start_time', 'end_time', 'modified', 'created']
+
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    search_fields = ('name', 'description')
+    ordering = ['name']
