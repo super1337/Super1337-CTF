@@ -23,3 +23,6 @@ class Contest(models.Model):
     modified = models.DateTimeField(auto_now=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+
+    STATE_CHOICES = ((1, 'Not Started'), (2, 'Ongoing'), (3, 'Ended'))
+    state = models.CharField(max_length=15, choices=STATE_CHOICES, default=1)

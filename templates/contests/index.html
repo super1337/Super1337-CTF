@@ -1,0 +1,30 @@
+{% extends 'contests/base.html' %}
+{% load el_pagination_tags %}
+
+{% block title %}
+    Contests
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Register for</h1>
+        <ul>
+            {% for contest in yet_to_begin %}
+                <li><a href="/contests/{{ contest.name }}">{{ contest.name }}</a> start time: {{ contest.start_time }} end time: {{ contest.end_time }}</li>
+            {% endfor %}
+        </ul>
+    <h1>Ongoing</h1>
+        <ul>
+            {% for contest in ongoing %}
+                <li><a href="/contests/{{ contest.name }}">{{ contest.name }}</a> start time: {{ contest.start_time }} end time: {{ contest.end_time }}</li>
+            {% endfor %}
+        </ul>
+    <h1>Ended</h1>
+        <ul>
+            {% for contest in ended %}
+                <li><a href="/contests/{{ contest.name }}">{{ contest.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+{% endblock  %}
