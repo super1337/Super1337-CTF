@@ -1,0 +1,16 @@
+{% extends 'contests/base.html' %}
+{% load el_pagination_tags %}
+{% load contests_tags %}
+
+{% block title %}
+    {{ contest.name }}
+{% endblock %}
+
+{% block content %}
+
+    <div>
+        <h1>{{ contest.name }}</h1>
+        <p>{{ contest.description|markdown }}</p>
+    </div>
+
+{% endblock %}
