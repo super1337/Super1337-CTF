@@ -29,6 +29,10 @@ class Contest(models.Model):
     state = models.CharField(max_length=15, choices=STATE_CHOICES, default=1)
 
 
+    def __str__(self):
+        return self.name
+
+
 class ContestAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_time', 'end_time', 'modified', 'created')
     search_fields = ('name', )

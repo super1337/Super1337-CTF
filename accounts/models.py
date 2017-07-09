@@ -6,6 +6,9 @@ from django.dispatch import receiver
 
 from challenges.models import Challenge
 from questionnaire.models import Quiz
+from contests.models import Contest
+
+from django.contrib.postgres.fields import JSONField
 
 
 class UserProfile(models.Model):
@@ -15,6 +18,7 @@ class UserProfile(models.Model):
     solved_challenges = models.ManyToManyField(Challenge, blank=True)
     attempted_quizzes = models.ManyToManyField(Quiz, blank=True)
     score = models.IntegerField(default=0, editable=False)
+    registered_contests = models.ManyToManyField(Contest, blank=True)
 
     def __str__(self):
         return str(self.user.username)
