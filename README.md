@@ -52,4 +52,7 @@ By default is assumes the input `JSON` file is `questionnaire/questions/question
 - [x] Complete `questionnaire` by making `routes`, `views` and `templates`.
 - [x] Make `models` and basic backbone for _jeopardy-style challenges_.
 - [ ] Add time based contests system.
-- [ ] Add questions on the website.
+- [ ] Make Challenge and Quizzes inaccessible out of challenge during ongoing time
+- [ ] Checking mechanism for contests
+- [ ] Score saving for User and Contest
+- [ ] Leaderboard
