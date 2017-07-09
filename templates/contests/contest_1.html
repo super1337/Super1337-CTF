@@ -16,6 +16,7 @@
         {% else %}
             <a href="{% url 'contest_register' contest.name %}" role="button"><button class="btn-primary">Register</button></a>
         {% endif %}
+        <p>Registered Users: {{ contest.users_registered }}</p>
     </div>
 
 {% endblock %}

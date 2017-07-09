@@ -16,6 +16,8 @@ def index(request):
 def contest_view(request, name):
     contest = get_object_or_404(Contest, name=name)
     print("contest", contest)
+    # compare query set of filter with empty query set
+    # improvise this
     has_registered = check_registered_contests(request, contest)
     print("has_registered", has_registered)
     if contest.state == 1:
@@ -28,7 +30,7 @@ def contest_register(request, name):
     contest = get_object_or_404(Contest, name=name)
     has_registered = check_registered_contests(request, contest)
     if has_registered:
-        contest.users_registered.add(request.user)
+        contest.users_registered += 1
         contest.save()
         request.user.userprofile.registered_contests.add(contest)
         request.user.userprofile.save()

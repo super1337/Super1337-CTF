@@ -28,7 +28,6 @@ class Contest(models.Model):
     STATE_CHOICES = ((1, 'Not Started'), (2, 'Ongoing'), (3, 'Ended'))
     state = models.CharField(max_length=15, choices=STATE_CHOICES, default=1)
 
-
     def __str__(self):
         return self.name
 
