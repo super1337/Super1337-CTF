@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^challenges/', include('challenges.urls')),
     url(r'^mega/', include('mega_challenge.urls')),
 
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^$', views.timer, name='timer')
 ]
