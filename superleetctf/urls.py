@@ -29,5 +29,5 @@ urlpatterns = [
     url(r'^mega/', include('mega_challenge.urls')),
 
     url(r'^$', views.index, name='index'),
-    url(r'^$', views.timer, name='timer')
+    url(r'^timer', views.timer, name='timer')
 ]
