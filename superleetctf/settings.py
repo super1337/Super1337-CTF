@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-import datetime
+# import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'questionnaire',
     'challenges',
     'contests',
-    'countdown'
+    # 'countdown'
 ]
 
 MIDDLEWARE = [
@@ -66,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'countdown.middleware.CountdownMiddleware',
+    # 'countdown.middleware.CountdownMiddleware',
 ]
 
 
@@ -178,4 +178,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EL_PAGINATION_PER_PAGE = 10
 
 
-COUNTDOWN_TARGET_DATE = datetime.datetime(2015, 1, 1, 0, 0, 0, 0)
+# COUNTDOWN_TARGET_DATE = datetime.datetime(2015, 1, 1, 0, 0, 0, 0)
