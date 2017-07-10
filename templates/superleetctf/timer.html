@@ -1,21 +1,10 @@
 {% extends "base.html" %}
 
-{% block head %}
 
-{% endblock %}
-<style type="text/css">
-#defaultCountdown { width: 240px; height: 45px; }
-</style>
 {% block content %}
 
-var newYear = new Date();
-newYear = new Date(newYear.getFullYear() + 1, 1 - 1, 1);
-$('#defaultCountdown').countdown({until: newYear});
-
-$('#removeCountdown').click(function() {
-    var destroy = $(this).text() === 'Remove';
-    $(this).text(destroy ? 'Re-attach' : 'Remove');
-    $('#defaultCountdown').countdown(destroy ? 'destroy' : {until: newYear});
-});
+<h1>jQuery Countdown Basics</h1>
+  <p>Counting down to 26 January <span id="year">2014</span>.</p>
+<div id="defaultCountdown"></div>
 
 {% endblock %}
