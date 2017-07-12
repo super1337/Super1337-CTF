@@ -11,12 +11,7 @@
     <div>
         <h1>{{ contest.name }}</h1>
         <p>{{ contest.description|markdown }}</p>
-        {% if has_registered %}
-            <p>You have successfully registered!</p>
-        {% else %}
-            <a href="{% url 'contest_register' contest.name %}" role="button"><button class="btn-primary">Register</button></a>
-        {% endif %}
-        <p>Registered Users: {{ contest.users_registered }}</p>
+        <p>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</p>
     </div>
 
 {% endblock %}

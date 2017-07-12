@@ -8,8 +8,6 @@ from challenges.models import Challenge
 from questionnaire.models import Quiz
 from contests.models import Contest
 
-from django.contrib.postgres.fields import JSONField
-
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -18,7 +16,6 @@ class UserProfile(models.Model):
     solved_challenges = models.ManyToManyField(Challenge, blank=True)
     attempted_quizzes = models.ManyToManyField(Quiz, blank=True)
     score = models.IntegerField(default=0, editable=False)
-    registered_contests = models.ManyToManyField(Contest, blank=True)
 
     def __str__(self):
         return str(self.user.username)
@@ -54,3 +51,17 @@ def create_user_profile(sender, instance, created, **kwargs):
     except ObjectDoesNotExist:
         UserProfile.objects.create(user=instance)
         instance.userprofile.save()
+
+
+# User result in this model.py file causes no problem and makes most sense
+# Import Error if this class in contests.models.py
+# because all other models need each other before compilation causing a loop like condition
+class UserResult(models.Model):
+    user = models.ForeignKey(User)
+    contest = models.ForeignKey(Contest)
+    # most important thing to note is limiting is not necessary as we will add these relation through backed
+    # and will keep this model readonly
+    # have to make many to many field to challenges limited to the one present in the contest
+    # passing query object(model challenge contest pk should be equal to pk of contest here) to limit_choices_to
+    solved_challenge = models.ManyToManyField(Challenge, limit_choices_to=models.Q(contest=contest))
+    score = models.IntegerField(default=0)
