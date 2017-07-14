@@ -17,17 +17,17 @@ def index(request):
 # needs to be improvised
 def contest_view(request, name):
     try:
-        contest = Contest.objects.get(Contest, name=name)
+        contest = Contest.objects.get(name=name)
     except ObjectDoesNotExist:
         return redirect('contests.views.index')
     if contest.state == '1':
-        return render(request, 'contests/contest_1.html', {'contest': contest})
+        return render(request, 'contests/contest_1.html', {'contest': contest, 'state' : contest.state })
     elif contest.state == '2':
         pass
     elif contest.state == '3':
         pass
     # check this, return if i return in above region /contest/name does'nt work
-    return render(request, 'contests/contest_1.html', {'contest': contest})
+    return render(request, 'contests/contest_1.html', {'contest': contest, 'state' : contest.state })
 
 
 # nothing as registration yet to keep things simple
