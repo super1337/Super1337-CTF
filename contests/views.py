@@ -34,7 +34,7 @@ def contest_view(request, name):
 
 def contest_register(request, name):
     try:
-        contest = Contest.objects.get(Contest, name=name)
+        contest = Contest.objects.get(name=name)
     except ObjectDoesNotExist:
         return redirect('contests.views.index')
     has_registered = check_registered_contests(request, contest)
