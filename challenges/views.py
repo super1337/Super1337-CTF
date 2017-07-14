@@ -5,6 +5,7 @@ from .forms import FlagForm
 from .models import Challenge, Tag
 
 
+
 def index(request):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     tagname = request.GET.get('tag')
@@ -35,6 +36,14 @@ def tags(request):
 def challenge(request, name):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     chal = Challenge.objects.get(name=name)
+    url_word_list = request.build_absolute_uri().split('/')
+    print(url_word_list)
+    print(url_word_list[4])
+
+    if url_word_list[4] == 'contests':
+        is_in_contest = True
+    else:
+        is_in_contest = False
 
     if request.method == 'POST':
         if request.user.is_authenticated():
@@ -46,6 +55,8 @@ def challenge(request, name):
                         request.user.userprofile.save()
                         chal.solve_count += 1
                         chal.save()
+                    # if is_in_contest == True:
+
                     messages['success'].append('You did it! You solved the challenge successfully!')
                 else:
                     messages['info'].append('Sorry! You got it wrong. Try harder')
