@@ -8,7 +8,10 @@ def index(request):
     yet_to_begin = contests.filter(state=1)
     ongoing = contests.filter(state=2)
     ended = contests.filter(state=3)
-    return render(request, 'contests/index.html', {'yet_to_begin': yet_to_begin, 'ongoing': ongoing, 'ended': ended})
+    l1 = len(yet_to_begin)
+    l2 = len(ongoing)
+    l3 = len(ended)
+    return render(request, 'contests/index.html', {'yet_to_begin': yet_to_begin, 'ongoing': ongoing, 'ended': ended, 'l1' : l1, 'l2' : l2, 'l3' : l3})
 
 
 # needs to be improvised
