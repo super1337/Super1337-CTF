@@ -9,6 +9,7 @@
 {% block content %}
 
     <h1>Yet to begin</h1>
+    <div style="border:3px dashed;padding:20px; font-size:30px; text-transform:uppercase; line-height:15px;">
         <ul>
             {% for contest in yet_to_begin %}
                 <li>
@@ -16,19 +17,27 @@
                 </li>
             {% endfor %}
         </ul>
+    </div>
+<br>
     <h1>Ongoing</h1>
-        <ul>
+    <div style="border:3px dashed;padding:20px; font-size:30px; text-transform:uppercase; line-height:15px;">
+        <ul type="square">
             {% for contest in ongoing %}
                 <li>
-                    <a href="/contests/{{ contest.name }}">{{ contest.name }}</a> start time: {{ contest.start_time }} end time: {{ contest.end_time }}
+                    <a href="/contests/{{ contest.name }}">{{ contest.name }}</a> <font size="2" ><br>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</font>
                 </li>
             {% endfor %}
         </ul>
+    </div>
+<br>
     <h1>Ended</h1>
+    <div style="border:3px dashed;padding:20px; font-size:30px; text-transform:uppercase; line-height:15px;">
+
         <ul>
             {% for contest in ended %}
                 <li><a href="/contests/{{ contest.name }}">{{ contest.name }}</a></li>
             {% endfor %}
         </ul>
+    </div>
 
 {% endblock  %}
