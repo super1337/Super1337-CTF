@@ -16,7 +16,10 @@ def index(request):
 
 # needs to be improvised
 def contest_view(request, name):
-    contest = get_object_or_404(Contest, name=name)
+    try:
+        contest = Contest.objects.get(Contest, name=name)
+    except ObjectDoesNotExist:
+        return redirect('contests.views.index')
     if contest.state == '1':
         return render(request, 'contests/contest_1.html', {'contest': contest})
     elif contest.state == '2':
