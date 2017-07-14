@@ -8,19 +8,21 @@
 
 {% block content %}
 
-    <div>
+    <div style="border:3px solid; padding:20px;margin:20px;text-transform:uppercase;">
+        <div style="border:2px solid; padding:5px;margin:-16px;">
         <h1>{{ contest.name }}</h1>
         <!--<p>{{ contest.description|markdown }}</p>-->
         <p>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</p>
+        </div>
 
         <br>
         {% ifequal state '1' %}
             <marquee><h2 style="color:#FF2;"> Contest is yet to begin ... </h2></marquee>
         {% endifequal %}
-        {% ifequal state '3' %}
-            <marquee><h2 style="color:#FF2;"> Contest is yet to begin ... </h2></marquee>
-        {% endifequal %}
         {% ifequal state '2' %}
+        <p>{{ contest.description|markdown }}</p>
+        {% endifequal %}
+        {% ifequal state '3' %}
             <marquee><h2 style="color:#F00;"> Contest is Over !!!</h2></marquee>
         {% endifequal %}
     </div>
