@@ -41,7 +41,7 @@ def challenge(request, name):
             form = FlagForm(request.POST)
             if form.is_valid():
                 if form.cleaned_data['flag'] == chal.flag:
-                    if chal not in request.user.userprofile.solved_challenges:
+                    if chal not in request.user.userprofile.solved_challenges.all():
                         request.user.userprofile.solved_challenges.add(chal)
                         request.user.userprofile.save()
                         chal.solve_count += 1

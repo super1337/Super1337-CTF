@@ -14,7 +14,7 @@ class Challenge(models.Model):
     flag = models.CharField(max_length=256)
     file = models.FileField(upload_to='challenges/', blank=True)
 
-    DIFF_CHOICES = ((1, 'n00b'), (2, 'Easy'), (3, 'Medium'), (4, 'Hard'), (5, '1337'))
+    DIFF_CHOICES = (('1', 'n00b'), ('2', 'Easy'), ('3', 'Medium'), ('4', 'Hard'), ('5', '1337'))
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
     score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
@@ -43,9 +43,9 @@ class Challenge(models.Model):
 
 
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'score', 'contest', 'modified', 'created')
+    list_display = ('name', 'score', 'contest', 'modified', 'created', 'difficulty')
     search_fields = ('name', 'problem')
     raw_id_fields = ('creators',)
     readonly_fields = ('solve_count',)
-    list_filter = ('tags', 'score', 'modified', 'created', 'creators')
-    ordering = ['name', 'score', 'creators', 'modified', 'created']
+    list_filter = ('tags', 'score', 'modified', 'created', 'creators', 'difficulty')
+    ordering = ['name', 'score', 'creators', 'modified', 'created', 'difficulty']

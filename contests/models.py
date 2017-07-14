@@ -23,7 +23,7 @@ class Contest(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
-    STATE_CHOICES = ((1, 'Not Started'), (2, 'Ongoing'), (3, 'Ended'))
+    STATE_CHOICES = (('1', 'Not Started'), ('2', 'Ongoing'), ('3', 'Ended'))
     state = models.CharField(max_length=15, choices=STATE_CHOICES, default=1)
 
     def __str__(self):
@@ -31,12 +31,12 @@ class Contest(models.Model):
 
 
 class ContestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'start_time', 'end_time', 'modified', 'created')
+    list_display = ('name', 'start_time', 'end_time', 'modified', 'created', 'state')
     search_fields = ('name', )
     raw_id_fields = ('creators',)
     # readonly_fields = ('state',)
     list_filter = ('tags', 'state', 'created', 'creators')
-    ordering = ['name', 'start_time', 'end_time', 'modified', 'created']
+    ordering = ['name', 'start_time', 'end_time', 'modified', 'created', 'state']
 
 
 class TagAdmin(admin.ModelAdmin):

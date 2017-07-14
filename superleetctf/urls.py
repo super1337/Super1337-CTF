@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^challenges/', include('challenges.urls')),
     url(r'^mega/', include('mega_challenge.urls')),
 
-    url(r'^$', views.index, name='index'),
+    # url(r'^$', views.index, name='index'),
     url(r'^timer', views.timer, name='timer'),
-    url(r'^AboutUs', TemplateView.as_view(template_name='superleetctf/AboutUs.html'))
+    url(r'^$', TemplateView.as_view(template_name='superleetctf/index.html'))
 ]

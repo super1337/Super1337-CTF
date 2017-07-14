@@ -15,12 +15,12 @@
         jQuery(document).ready(function() {
             $('#countdown_dashboard').countDown({
                     targetOffset: {
-                        'month': 	0,
-                        'year': 	0,
-                        'day': 		{{ countdown_day }},
-                        'hour': 	{{ countdown_hour }},
-                        'min': 		{{ countdown_min }},
-                        'sec': 		{{ countdown_sec }}
+                        'month': 0,
+                        'year': 0,
+                        'day': {{ countdown_day }},
+                        'hour': {{ countdown_hour }},
+                        'min': {{ countdown_min }},
+                        'sec': {{ countdown_sec }}
                     },
 
                     onComplete: function (){
