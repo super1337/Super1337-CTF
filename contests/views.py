@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 
 from .models import Contest
 from results.models import UserResult
@@ -18,37 +18,41 @@ def index(request):
 def contest_view(request, name):
     try:
         contest = Contest.objects.get(name=name)
-    except ObjectDoesNotExist:
-        return redirect('contests.views.index')
+    except Contest.DoesNotExist:
+        return HttpResponseRedirect('/contests/')
     if contest.state == '1':
-        return render(request, 'contests/contest_1.html', {'contest': contest, 'state' : contest.state })
+        has_registered = check_registered_contests(request, contest)
+        return render(request, 'contests/contest_1.html', {
+            'contest': contest, 'state' : contest.state, 'has_registered': has_registered
+        })
     elif contest.state == '2':
         pass
     elif contest.state == '3':
         pass
     # check this, return if i return in above region /contest/name does'nt work
-    return render(request, 'contests/contest_1.html', {'contest': contest, 'state' : contest.state })
+    return render(request, 'contests/contest_1.html', {'contest': contest, 'state': contest.state})
 
 
 # nothing as registration yet to keep things simple
 
 def contest_register(request, name):
+    user = request.user
     try:
         contest = Contest.objects.get(name=name)
-    except ObjectDoesNotExist:
-        return redirect('contests.views.index')
+    except Contest.DoesNotExist:
+        return HttpResponseRedirect('/contests/')
     has_registered = check_registered_contests(request, contest)
     if not has_registered:
-        UserResult.create()
-
-    return render(request, 'contests/contest_1.html', {'contest': contest, 'has_registered': has_registered})
+        user_result = UserResult.create(user, contest)
+        user_result.save()
+    return HttpResponseRedirect('/contests/'+name)
 
 
 def check_registered_contests(request, contest):
     try:
-        list_contained_contest = request.user.userprofile.registered_contests.filter(name=contest.name)
+        list_contained_contest = UserResult.objects.get(user=request.user.pk,contest=contest.pk)
         has_registered = True
-    except:
+    except UserResult.DoesNotExist:
         has_registered = False
     finally:
         return has_registered

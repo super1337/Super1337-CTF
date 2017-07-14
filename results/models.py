@@ -20,4 +20,5 @@ class UserResult(models.Model):
 
     @classmethod
     def create(cls, user, contest):
-        user_result = cls(user=user.pk, contest=contest.pk)
+        user_result = cls(user=user, contest=contest)
+        return user_result

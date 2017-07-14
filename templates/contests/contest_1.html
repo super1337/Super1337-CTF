@@ -25,6 +25,11 @@
         {% ifequal state '3' %}
             <marquee><h2 style="color:#F00;"> Contest is Over !!!</h2></marquee>
         {% endifequal %}
+        {% if has_registered %}
+            <p>You have successfully registered!</p>
+        {% else %}
+            <a href="{% url 'contest_register' contest.name %}" role="button"><button class="btn-primary">Register</button></a>
+        {% endif %}
     </div>
 
 {% endblock %}
