@@ -3,7 +3,7 @@
 
 
 {% block title %}
-    Challenges
+    {{ contest.name }}
 {% endblock %}
 
 {% block content %}
@@ -28,10 +28,8 @@
                             <span class="pull-right">{{ challenge.score }}</span></h4>
                         </h3>
                         <div class="list-group-item-text">
-                            <p>{{ challenge.name }}</p>
                             <p>{{ challenge.difficulty }}</p>
                             <p>{{ challenge.solvecount }}</p>
-                            <p>{{ challenge.created }}</p>
                         </div>
                     </a>
                 {% empty %}

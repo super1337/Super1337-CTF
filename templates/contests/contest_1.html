@@ -16,15 +16,16 @@
         </div>
 
         <br>
-        {% ifequal state '1' %}
-            <marquee><h2 style="color:#FF2;"> Contest is yet to begin ... </h2></marquee>
-        {% endifequal %}
-        {% ifequal state '2' %}
-        <p>{{ contest.description|markdown }}</p>
-        {% endifequal %}
-        {% ifequal state '3' %}
-            <marquee><h2 style="color:#F00;"> Contest is Over !!!</h2></marquee>
-        {% endifequal %}
+
+{#        {% ifequal state '1' %}#}
+{#            <marquee><h2 style="color:#FF2;"> Contest is yet to begin ... </h2></marquee>#}
+{#        {% endifequal %}#}
+{#        {% ifequal state '2' %}#}
+{#        <p>{{ contest.description|markdown }}</p>#}
+{#        {% endifequal %}#}
+{#        {% ifequal state '3' %}#}
+{#            <marquee><h2 style="color:#F00;"> Contest is Over !!!</h2></marquee>#}
+{#        {% endifequal %}#}
         {% if has_registered %}
             <p>You have successfully registered!</p>
         {% else %}

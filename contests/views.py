@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from .models import Contest
@@ -14,7 +14,6 @@ def index(request):
     return render(request, 'contests/index.html', {'yet_to_begin': yet_to_begin, 'ongoing': ongoing, 'ended': ended})
 
 
-# needs to be improvised
 def contest_view(request, name):
     try:
         contest = Contest.objects.get(name=name)
@@ -23,17 +22,14 @@ def contest_view(request, name):
     if contest.state == '1':
         has_registered = check_registered_contests(request, contest)
         return render(request, 'contests/contest_1.html', {
-            'contest': contest, 'state' : contest.state, 'has_registered': has_registered
-        })
+            'contest': contest, 'has_registered': has_registered})
     elif contest.state == '2':
-        pass
+        challenges = contest.challenge_set.all()
+        return render(request, 'contests/contest_2.html', {'contest': contest, 'challenges': challenges})
     elif contest.state == '3':
-        pass
-    # check this, return if i return in above region /contest/name does'nt work
-    return render(request, 'contests/contest_1.html', {'contest': contest, 'state': contest.state})
+        challenges = contest.challenge_set.all()
+        return render(request, 'contests/contest_3.html', {'contest': contest, 'challenges': challenges})
 
-
-# nothing as registration yet to keep things simple
 
 def contest_register(request, name):
     user = request.user
