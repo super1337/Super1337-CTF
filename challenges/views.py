@@ -23,9 +23,9 @@ def index(request):
             messages['info'].append('Tag {} does not exist! Showing all challenges instead.'.format(tagname))
             challenges = Challenge.objects.all().order_by(sort)
         else:
-            challenges = tag.challenge_set.all().order_by(sort)
+            challenges = tag.challenge_set.all().filter(hidden=False).order_by(sort)
     else:
-        challenges = Challenge.objects.all().order_by(sort)
+        challenges = Challenge.objects.all().filter(hidden=False).order_by(sort)
 
     return render(request, 'challenges/index.html', {'challenges': challenges, 'messages': messages})
 
