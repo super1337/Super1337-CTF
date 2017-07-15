@@ -35,20 +35,30 @@ def tags(request):
     return render(request, 'challenges/tags.html', {'tags': tags})
 
 
-def challenge(request, name):
+def challenge(request, name, **kwargs):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     chal = Challenge.objects.get(name=name)
-    url_word_list = request.build_absolute_uri().split('/')
 
-    if url_word_list[4] == 'contests':
+    # url_word_list = request.build_absolute_uri().split('/')
+
+    if contest_name in kwargs:
         is_in_contest = True
-        contest_name = url_word_list[5]
         try:
             contest = Contest.objects.get(name=contest_name)
         except Contest.DoesNotExist:
             return HttpResponseRedirect('/contests/')
     else:
         is_in_contest = False
+
+    # if url_word_list[4] == 'contests':
+    #     is_in_contest = True
+    #     contest_name = url_word_list[5]
+    #     try:
+    #         contest = Contest.objects.get(name=contest_name)
+    #     except Contest.DoesNotExist:
+    #         return HttpResponseRedirect('/contests/')
+    # else:
+    #     is_in_contest = False
 
     if request.method == 'POST':
         if request.user.is_authenticated():

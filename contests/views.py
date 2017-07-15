@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Contest
 from results.models import UserResult
+from challenges.views import challenge
 
 
 def index(request):
@@ -29,6 +30,10 @@ def contest_view(request, name):
     elif contest.state == '3':
         challenges = contest.challenge_set.all()
         return render(request, 'contests/contest_3.html', {'contest': contest, 'challenges': challenges})
+
+
+def challenge_solve(request,contest_name, challenge_name):
+    return challenge(request, challenge_name, contest_name=contest_name)
 
 
 def contest_register(request, name):
