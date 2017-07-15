@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Quiz
 
@@ -19,7 +18,7 @@ def quiz(request, name):
 
     try:
         quiz = Quiz.objects.get(name=name)
-    except ObjectDoesNotExist:
+    except Quiz.DoesNotExist:
         messages['danger'].append('The quiz {} does not exist!'.format(name))
         questions = []
 

@@ -19,7 +19,7 @@ class Challenge(models.Model):
     score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, blank=True)
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True, blank=True)
 
     hidden = models.BooleanField(default=True)
     solve_count = models.IntegerField(default=0)

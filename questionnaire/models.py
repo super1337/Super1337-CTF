@@ -16,7 +16,7 @@ class Quiz(models.Model):
 
     DIFF_CHOICES = (('n00b', 'n00b'), ('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard'), ('1337', '1337'))
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
-    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True)
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, null=True, blank=True)
     creators = models.ManyToManyField(User)
 
     hidden = models.BooleanField(default=True)
@@ -30,7 +30,9 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    # although it doesn't make sense in solving solo questions
+    # but here null=True so that addquestion works without giving quiz as one of the inputs
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
 
@@ -63,10 +65,10 @@ class MCQ(Question):
     correct = models.IntegerField()
 
     @classmethod
-    def create(cls, question, hints, choices, correct, score):
+    def create(cls, question, hints, choices, correct, score, quiz):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
         answer = CHOICES[correct][1]
-        mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score)
+        mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score, quiz=quiz)
         return mcq
 
 
