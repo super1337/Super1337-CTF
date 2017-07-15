@@ -41,7 +41,7 @@ def challenge(request, name, **kwargs):
 
     # url_word_list = request.build_absolute_uri().split('/')
 
-    if contest_name in kwargs:
+    if 'contest_name' in kwargs:
         is_in_contest = True
         try:
             contest = Contest.objects.get(name=contest_name)

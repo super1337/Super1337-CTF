@@ -14,7 +14,7 @@ class Challenge(models.Model):
     flag = models.CharField(max_length=256)
     file = models.FileField(upload_to='challenges/', blank=True)
 
-    DIFF_CHOICES = (('1', 'n00b'), ('2', 'Easy'), ('3', 'Medium'), ('4', 'Hard'), ('5', '1337'))
+    DIFF_CHOICES = (('n00b', 'n00b'), ('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard'), ('1337', '1337'))
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
     score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
