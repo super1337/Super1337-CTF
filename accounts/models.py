@@ -30,7 +30,7 @@ class UserProfile(models.Model):
         return score
 
     def save(self, *args, **kwargs):
-        '''On save, update score '''
+        """ On save, update score """
 
         if not self.id:
             self.score = 0

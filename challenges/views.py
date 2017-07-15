@@ -37,9 +37,6 @@ def tags(request):
 
 def challenge(request, name, **kwargs):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
-    chal = Challenge.objects.get(name=name)
-
-    # url_word_list = request.build_absolute_uri().split('/')
 
     if 'contest_name' in kwargs:
         is_in_contest = True
@@ -49,6 +46,18 @@ def challenge(request, name, **kwargs):
             return HttpResponseRedirect('/contests/')
     else:
         is_in_contest = False
+
+    try:
+        chal = Challenge.objects.get(name=name)
+    except Challenge.DoesNotExist:
+        return HttpResponseRedirect('/contests/')
+
+    if chal.hidden and (not is_in_contest):
+        return HttpResponseRedirect('/challenges/')
+
+    # url_word_list = request.build_absolute_uri().split('/')
+
+
 
     # if url_word_list[4] == 'contests':
     #     is_in_contest = True
