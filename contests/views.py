@@ -50,7 +50,7 @@ def contest_register(request, name):
 
 def check_registered_contests(request, contest):
     try:
-        list_contained_contest = UserResult.objects.get(user=request.user.pk,contest=contest.pk)
+        result_object = UserResult.objects.get(user=request.user.pk,contest=contest.pk)
         has_registered = True
     except UserResult.DoesNotExist:
         has_registered = False

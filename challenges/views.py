@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 
 from .forms import FlagForm
 from .models import Challenge, Tag
-
+from results.models import UserResult
+from contests.models import Contest
 
 
 def index(request):
@@ -37,11 +39,14 @@ def challenge(request, name):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     chal = Challenge.objects.get(name=name)
     url_word_list = request.build_absolute_uri().split('/')
-    print(url_word_list)
-    print(url_word_list[4])
 
     if url_word_list[4] == 'contests':
         is_in_contest = True
+        contest_name = url_word_list[5]
+        try:
+            contest = Contest.objects.get(name=contest_name)
+        except Contest.DoesNotExist:
+            return HttpResponseRedirect('/contests/')
     else:
         is_in_contest = False
 
@@ -55,7 +60,15 @@ def challenge(request, name):
                         request.user.userprofile.save()
                         chal.solve_count += 1
                         chal.save()
-                    # if is_in_contest == True:
+                    if is_in_contest:
+                        try:
+                            result_object = UserResult.objects.get(user=request.user.pk, contest=contest.pk)
+                        except UserResult.DoesNotExist:
+                            return HttpResponseRedirect('/contests/'+contest_name+'/register/')
+                        finally:
+                            if chal not in result_object.solved_challenges.all():
+                                result_object.solved_challenges.add(chal)
+                                result_object.score += chal.score
 
                     messages['success'].append('You did it! You solved the challenge successfully!')
                 else:
