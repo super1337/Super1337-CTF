@@ -12,7 +12,8 @@ class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag)
-    score = models.IntegerField(editable=False) # make it dependent on problems contained or some final normalized score
+    score = models.IntegerField(editable=False, default=0)
+    # make score dependent on problems contained or some final normalized score
 
     DIFF_CHOICES = (('n00b', 'n00b'), ('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard'), ('1337', '1337'))
     difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
@@ -38,8 +39,6 @@ class Question(models.Model):
 
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField()
-
-    hidden = models.BooleanField(default=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -73,7 +72,7 @@ class MCQ(Question):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('quiz', 'question', 'score', 'hidden', 'created', 'modified')
+    list_display = ('quiz', 'question', 'score', 'created', 'modified')
     search_fields = ('quiz', 'question')
     list_filter = ('tags', 'score', 'modified', 'created')
     ordering = ['score', 'modified', 'created']
@@ -88,7 +87,7 @@ class MCQAdmin(QuestionAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ('name', 'score', 'contest')
+    list_display = ('name', 'score', 'contest', 'hidden', 'created', 'modified')
     search_fields = ('name', 'description', 'contest')
     raw_id_fields = ('creators',)
     list_filter = ('tags', 'score', 'modified', 'created', 'creators')
