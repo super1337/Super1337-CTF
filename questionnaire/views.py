@@ -34,4 +34,4 @@ def quiz(request, name):
     else:
         questions = quiz.question_set.all()
 
-    return render(request, 'questionnaire/quiz.html', {'questions': questions, 'messages': messages})
+    return render(request, 'questionnaire/quiz.html', {'quiz': quiz, 'questions': questions, 'messages': messages})
