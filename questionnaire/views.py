@@ -4,8 +4,16 @@ from .models import Quiz
 
 
 def index(request):
+    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+
+    sort = request.GET.get('sort')
+    if sort not in ['modified', 'created']:
+        if sort is not None:
+            messages['info'].append('Cannot sort by {}! Sorting by \'created\' instead.!'.format(sort))
+        sort = 'created'
+
     quizzes = Quiz.objects.all()
-    return render(request, 'questionnaire/index.html', {'quizzes': quizzes})
+    return render(request, 'questionnaire/index.html', {'quizzes': quizzes, 'messages': messages})
 
 
 def quiz(request, name):
@@ -13,7 +21,8 @@ def quiz(request, name):
 
     sort = request.GET.get('sort')
     if sort not in ['modified', 'created', 'score']:
-        messages['info'].append('Cannot sort by {}! Sorting by \'created\' instead.!'.format(name))
+        if sort is not None:
+            messages['info'].append('Cannot sort by {}! Sorting by \'created\' instead.!'.format(sort))
         sort = 'created'
 
     try:
@@ -25,4 +34,4 @@ def quiz(request, name):
     else:
         questions = quiz.question_set.all()
 
-    return render(request, 'challenges/index.html', {'questions': questions, 'messages': messages})
+    return render(request, 'questionnaire/quiz.html', {'questions': questions, 'messages': messages})

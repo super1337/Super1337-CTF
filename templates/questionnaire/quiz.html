@@ -3,36 +3,36 @@
 
 
 {% block title %}
-    Questionnaire
+    {{ quiz.name }}
 {% endblock %}
 
 {% block content %}
 
-
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h1>Questionnaire</h1>
+            <h1>{{ quiz.name }}</h1>
         </div>
         <div class="panel-body">
             <div class="list-group">
-                {% paginate quizzes %}
-                {% for quiz in quizzes %}
-                    <a href="/questionnaire/{{ quiz.name }}" class="list-group-item">
+                {% paginate questions %}
+                {% for question in questions %}
+                    <a href="/questionnaire/{{ quiz.name }}/{{ question.pk }}" class="list-group-item">
                         <h3 class="list-group-item-heading">
-                            {% if quiz in user.userprofile.attempted_quizzes.all %}
-                                <span class="glyphicon glyphicon-star"></span>
-                            {% else %}
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                            {% endif %}
-                            {{ quiz.name }}
-                            <span class="pull-right">{{ quiz.score }}</span></h4>
+{#                            quiz result object#}
+{#                            {% if question in user.userprofile.attempted_quizzes.all %}#}
+{#                                <span class="glyphicon glyphicon-star"></span>#}
+{#                            {% else %}#}
+{#                                <span class="glyphicon glyphicon-star-empty"></span>#}
+{#                            {% endif %}#}
+                            {{ question.name }}
+                            <span class="pull-right">{{ question.score }}</span></h4>
                         </h3>
                         <div class="list-group-item-text">
-                            <p>{{ quiz.created }}</p>
+                            <p>{{ question.question }}</p>
                         </div>
                     </a>
                 {% empty %}
-                    <p class="text-info">Sorry! No quizzes found!</p>
+                    <p class="text-info">Sorry! No challenges found!</p>
                 {% endfor %}
 
                 {% get_pages %}
