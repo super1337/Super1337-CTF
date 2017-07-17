@@ -34,7 +34,7 @@ def tags(request):
     return render(request, 'challenges/tags.html', {'tags': tags})
 
 
-def challenge(request, challenge_slug, contest_slug=None, messages=None, **kwargs):
+def challenge(request, challenge_slug, contest_slug=None, messages=None):
     if messages is not None:
         messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
 

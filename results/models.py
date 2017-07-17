@@ -1,8 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
 from challenges.models import Challenge
-from questionnaire.models import Quiz, Question
+from questionnaire.models import Quiz, SimpleQuestion, MCQ
 from contests.models import Contest
+
+
+class QuizResult(models.Model):
+    user = models.ForeignKey(User)
+    quiz = models.ForeignKey(Quiz)
+    contest = models.ForeignKey(Contest, null=True, blank=True)
+    correct_question = models.ManyToManyField(SimpleQuestion, blank=True)
+    score = models.IntegerField(default=0)
 
 
 # User result in this model.py file causes no problem and makes most sense
@@ -17,18 +25,10 @@ class ContestResult(models.Model):
     # have to make many to many field to challenges limited to the one present in the contest
     # passing query object(model challenge contest pk should be equal to pk of contest here) to limit_choices_to
     solved_challenge = models.ManyToManyField(Challenge, blank=True)
+    quiz_results = models.ManyToManyField(QuizResult)
     challenge_score = models.IntegerField(default=0)
-
-    quiz_result = models.ManyToManyField(QuizResult, blank=True)
 
     @classmethod
     def create(cls, user, contest):
         user_result = cls(user=user, contest=contest)
         return user_result
-
-
-class QuizResult(models.Model):
-    user = models.ForeignKey(User)
-    quiz = models.ForeignKey(Quiz)
-    correct_question = models.ManyToManyField(Question, blank=True)
-    score = models.IntegerField(default=0)

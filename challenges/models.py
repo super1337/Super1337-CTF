@@ -8,14 +8,14 @@ from contests.models import Contest, Tag
 
 class Challenge(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=25, unique=True)
+    slug = models.SlugField(max_length=16, unique=True)
     problem = models.CharField(max_length=256)
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
     file = models.FileField(upload_to='challenges/', blank=True)
 
     DIFF_CHOICES = (('n00b', 'n00b'), ('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard'), ('1337', '1337'))
-    difficulty = models.CharField(max_length=10, choices=DIFF_CHOICES)
+    difficulty = models.CharField(max_length=8, choices=DIFF_CHOICES)
     score = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)

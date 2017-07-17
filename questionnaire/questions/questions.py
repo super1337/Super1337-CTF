@@ -14,37 +14,41 @@ def addquestions(filename=JSON_FILEPATH + JSON_FILENAME):
 
         for question in questions:
             ques = SimpleQuestion(question=question['question'],
+                                  slug=question['slug'],
                                   hints=question['hints'],
                                   answer=question['answer'],
                                   score=question['score'], 
-                                  quiz=Quiz.objects.get(pk=question['quiz']))
+                                  quiz=Quiz.objects.get(slug=question['quiz-slug']))
             ques.save()
 
         for mcq in mcqs:
-            ques = MCQ.create(question=mcq['question'], 
+            ques = MCQ.create(question=mcq['question'],
+                              slug=mcq['slug'],
                               hints=mcq['hints'], 
                               choices=mcq['choices'], 
                               correct=int(mcq['correct']), 
                               score=mcq['score'], 
-                              quiz=Quiz.objects.get(pk=mcq['quiz']))
+                              quiz=Quiz.objects.get(slug=mcq['quiz-slug']))
             ques.save()
     return filename
 
 """
-example: add such object to question.json
+example: add such object to questions.json
 {
   "QUESTIONS": [
     {
       "question": "What is the full form of IP?",
+      "slug": "IP-sq",
       "hints": "Seriously?!",
       "answer": "Internet Protocol",
       "score": 10,
-      "quiz": 1
+      "quiz-slug": "test_quiz"
     }
   ],
   "MCQS": [
     {
       "question": "What is the full form of IP?",
+      "slug": "IP-mcq",
       "hints": "Seriously?!",
       "choices": [
         "Internet Programs",
@@ -54,7 +58,7 @@ example: add such object to question.json
       ],
       "correct": 2,
       "score": 10,
-      "quiz": 1
+      "quiz-slug": "test_quiz"
     }
   ]
 }

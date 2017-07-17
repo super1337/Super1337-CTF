@@ -32,10 +32,9 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    slug = models.SlugField(max_length=25, unique=True)
+    slug = models.SlugField(max_length=16, unique=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     hints = models.CharField(max_length=256, blank=True)
-    answer = models.CharField(max_length=256)
 
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField()
@@ -52,11 +51,11 @@ class Question(models.Model):
     #     return super(Question, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.question)
+        return str(self.slug)
 
 
 class SimpleQuestion(Question):
-    pass
+    answer = models.CharField(max_length=64)
 
 
 class MCQ(Question):
@@ -64,10 +63,10 @@ class MCQ(Question):
     correct = models.IntegerField()
 
     @classmethod
-    def create(cls, question, hints, choices, correct, score, quiz):
+    def create(cls, question, slug, hints, choices, correct, score, quiz):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
         answer = CHOICES[correct][1]
-        mcq = cls(question=question, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score, quiz=quiz)
+        mcq = cls(question=question, slug=slug, hints=hints, choices=CHOICES, correct=correct, score=score, quiz=quiz)
         return mcq
 
 
