@@ -1,6 +1,17 @@
-<span id="a">Superleet@iitdelhi</span>:<span id="b">~</span><span id="c">$</span> cat Superleet.txt<br/><br/>
-Hi, We are Team S.A.R.Y.U from IIT Delhi.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>If you are a script kiddie, go away buddy, we dont want to hurt your sentiments</p><!-- qowifjqwoeijfoqweijfqweoifjqweofijqweoqwoijefoqwijefoijfqiwoefjj -->
-<p>We are sophomores from <a href="http://www.iitd.ac.in">IIT Delhi</a> </p><!- oqwipjefqwioefjwioqfjoiqwjfeioqwjefoi -->
-<p>We love to hack.</p><!-- owlsqweoifjqwoefijqwoeifjqwoefijwef -->
-If you would like to get in touch with us, whether it be for tech support, learn from us or to just say hi<!-- slightdelayhere-->, feel free to send us an  email or a tweet.<!-- longlongcomment --> My email address is: <a href="mailto:coecsia@iitd.ac.in">coecsia.com</a>.
-<p>And if you haven't already, be sure to check out our tech publication <a href="http://www.skulltech.com">http://www.skulltech.com</a>
+<span id="a">Superleet@iitdelhi</span>:<span id="b">~</span><span id="c">$</span> cat Superleet.txt<br/>
+Hi, We are Team S.A.R.Y.U from IIT Delhi.<!-- laglaglaglaglaglaglaglaglaglaglaglag --><br/>
+<p>If you are a script kiddie, go away buddy, we dont want to hurt your sentiments ...<br/></p><!-- qowifjqwoeijfoqweijfqweoifjqweofijqweoqwoijefoqwijefoijfqiwoefjj -->
+<p>We are ethical hackers from <a href="http://www.iitd.ac.in">IIT Delhi</a> </p><!- oqwipjefqwioefjwioqfjoiqwjfeioqwjefoi -->
+<p>We will love to hack you.</p><!-- owlsqweoifjqwoefijqwoeifjqwoefijwef -->
+If you would like to get in touch with us, whether it be for tech support, learn from us or to just say hi<!-- slightdelayhere-->, feel free to send us an  email or a tweet.<!-- longlongcomment --> Drop your messages at <a href="mailto:">Center of Excellence </a>.
+<br><span id="a">Superleet@iitdelhi</span>:<span id="b">~</span><span id="c">$</span> fsociety <br/>
+<span id="a" >
+█▀▀ █▀▀ █▀▀█ █▀▀ ░▀░ █▀▀ ▀▀█▀▀ █░░█
+█▀▀ ▀▀█ █░░█ █░░ ▀█▀ █▀▀ ░░█░░ █▄▄█
+▀░░ ▀▀▀ ▀▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀ ░░▀░░ ▄▄▄█
+
+</span>
+
+
+
+
