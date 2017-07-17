@@ -12,7 +12,8 @@ class Tag(models.Model):
 
 
 class Contest(models.Model):
-    name = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=64)
+    slug = models.SlugField(max_length=25, unique=True)
     description = models.TextField(blank=False)
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)

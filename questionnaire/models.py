@@ -31,9 +31,8 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=256)
-    # although it doesn't make sense in solving solo questions
-    # but here null=True so that addquestion works without giving quiz as one of the inputs
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True)
+    slug = models.SlugField(max_length=25, unique=True)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     hints = models.CharField(max_length=256, blank=True)
     answer = models.CharField(max_length=256)
 

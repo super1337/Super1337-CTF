@@ -85,13 +85,13 @@ def challenge(request, challenge_name, contest_name=None, messages=None, **kwarg
                         chal.save()
                     if is_in_contest:
                         try:
-                            result_object = ContestResult.objects.get(user=request.user.pk, contest=contest.pk)
+                            contest_result = ContestResult.objects.get(user=request.user.pk, contest=contest.pk)
                         except ContestResult.DoesNotExist:
                             return redirect('contests.views.contest_register')
                         finally:
-                            if chal not in result_object.solved_challenges.all():
-                                result_object.solved_challenges.add(chal)
-                                result_object.score += chal.score
+                            if chal not in contest_result.solved_challenges.all():
+                                contest_result.solved_challenges.add(chal)
+                                contest_result.score += chal.score
 
                     messages['success'].append('You did it! You solved the challenge successfully!')
                 else:

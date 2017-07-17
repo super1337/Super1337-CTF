@@ -3,12 +3,12 @@ import os
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
 from contests.models import Contest, Tag
 
 
 class Challenge(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=25, unique=True)
     problem = models.CharField(max_length=256)
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
