@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect
 
 from .forms import FlagForm
 from .models import Challenge, Tag
-from results.models import UserResult
+from results.models import ContestResult
 from contests.models import Contest
 
 
@@ -35,40 +34,45 @@ def tags(request):
     return render(request, 'challenges/tags.html', {'tags': tags})
 
 
-def challenge(request, name, **kwargs):
-    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+def challenge(request, challenge_name, contest_name=None, messages=None, **kwargs):
+    if messages is not None:
+        messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
 
-    if 'contest_name' in kwargs:
+    # Get contest object or redirect to contests.views.index
+    if contest_name is not None:
         is_in_contest = True
         try:
             contest = Contest.objects.get(name=contest_name)
         except Contest.DoesNotExist:
-            return HttpResponseRedirect('/contests/')
+            return redirect('contests.views.index', messages={'warning': ['No contest with name - {}'.format(contest_name)]})
     else:
         is_in_contest = False
 
+    # Get challenge or redirect according to in contest or challenge tab
     try:
-        chal = Challenge.objects.get(name=name)
+        chal = Challenge.objects.get(name=challenge_name)
     except Challenge.DoesNotExist:
-        return HttpResponseRedirect('/contests/')
+        if is_in_contest:
+            return redirect('contests.views.contest_view', contest_name=contest_name, messages={
+                'warning': ['No challenge with name - {}'.format(challenge_name)]})
+        else:
+            return redirect('challenges.views.index', messages={
+                'warning': ['No challenge with name - {}'.format(challenge_name)]})
 
+    # Makes challenge inaccessible out of contest even when user try with url manipulation
     if chal.hidden and (not is_in_contest):
-        return HttpResponseRedirect('/challenges/')
+        return redirect('challenges.views.index', messages={
+            'warning': ['No challenge with name - {}'.format(challenge_name)]})
 
-    # url_word_list = request.build_absolute_uri().split('/')
+    # If user opens challenges other than the ones in contest through contest tab
+    # redirect them away from getting unnecessary score
+    if is_in_contest:
+        if chal in contest.challenge_set.all():
+            return redirect('contests.views.contest_view', contest_name=contest_name, messages={
+                'warning': ['No challenge with name - {}'.format(challenge_name)]})
 
-
-
-    # if url_word_list[4] == 'contests':
-    #     is_in_contest = True
-    #     contest_name = url_word_list[5]
-    #     try:
-    #         contest = Contest.objects.get(name=contest_name)
-    #     except Contest.DoesNotExist:
-    #         return HttpResponseRedirect('/contests/')
-    # else:
-    #     is_in_contest = False
-
+    # main challenge checking code
+    # makes necessary changes to user challenge and ContestResult objects
     if request.method == 'POST':
         if request.user.is_authenticated():
             form = FlagForm(request.POST)
@@ -81,9 +85,9 @@ def challenge(request, name, **kwargs):
                         chal.save()
                     if is_in_contest:
                         try:
-                            result_object = UserResult.objects.get(user=request.user.pk, contest=contest.pk)
-                        except UserResult.DoesNotExist:
-                            return HttpResponseRedirect('/contests/'+contest_name+'/register/')
+                            result_object = ContestResult.objects.get(user=request.user.pk, contest=contest.pk)
+                        except ContestResult.DoesNotExist:
+                            return redirect('contests.views.contest_register')
                         finally:
                             if chal not in result_object.solved_challenges.all():
                                 result_object.solved_challenges.add(chal)
