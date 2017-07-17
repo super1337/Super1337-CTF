@@ -18,7 +18,7 @@
         </p>
     </div>
 
-    <form action="/challenges/{{ challenge.name }}/" method="post">
+    <form action="/challenges/{{ challenge.slug }}/" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit"/>

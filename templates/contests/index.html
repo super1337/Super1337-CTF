@@ -14,7 +14,7 @@
         <ul>
             {% for contest in yet_to_begin %}
                 <li>
-                    <a href="/contests/{{ contest.name }}">{{ contest.name }}</a> start time: {{ contest.start_time }} end time: {{ contest.end_time }}
+                    <a href="/contests/{{ contest.slug }}">{{ contest.name }}</a> start time: {{ contest.start_time }} end time: {{ contest.end_time }}
                 </li>
             {% endfor %}
         </ul>
@@ -32,7 +32,7 @@
         <ul type="square">
             {% for contest in ongoing %}
                 <li>
-                    <a href="/contests/{{ contest.name }}">{{ contest.name }}</a> <font size="2" ><br>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</font>
+                    <a href="/contests/{{ contest.slug }}">{{ contest.name }}</a> <font size="2" ><br>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</font>
                 </li>
             {% endfor %}
         </ul>
@@ -50,7 +50,7 @@
 
         <ul>
             {% for contest in ended %}
-                <li><a href="/contests/{{ contest.name }}">{{ contest.name }}</a></li>
+                <li><a href="/contests/{{ contest.slug }}">{{ contest.name }}</a></li>
             {% endfor %}
         </ul>
     </div>

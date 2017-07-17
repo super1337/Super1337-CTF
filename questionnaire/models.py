@@ -10,6 +10,7 @@ from django.dispatch import receiver
 
 class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=25, unique=True)
     description = models.CharField(max_length=256, blank=True)
     tags = models.ManyToManyField(Tag)
     score = models.IntegerField(editable=False, default=0)

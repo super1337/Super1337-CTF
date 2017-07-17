@@ -16,7 +16,7 @@
             <div class="list-group">
                 {% paginate challenges %}
                 {% for challenge in challenges %}
-                    <a href="/challenges/{{ challenge.name }}" class="list-group-item">
+                    <a href="/challenges/{{ challenge.slug }}" class="list-group-item">
                         <h3 class="list-group-item-heading">
                             {% if challenge in user.userprofile.solved_challenges.all %}
                                 <span class="glyphicon glyphicon-star"></span>

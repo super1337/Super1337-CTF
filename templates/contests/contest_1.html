@@ -11,7 +11,7 @@
     <div style="border:3px solid; padding:20px;margin:20px;text-transform:uppercase;">
         <div style="border:2px solid; padding:5px;margin:-16px;">
         <h1>{{ contest.name }}</h1>
-        <!--<p>{{ contest.description|markdown }}</p>-->
+        <p>{{ contest.initial_description|markdown }}</p>
         <p>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</p>
         </div>
 
@@ -29,7 +29,7 @@
         {% if has_registered %}
             <p>You have successfully registered!</p>
         {% else %}
-            <a href="{% url 'contest_register' contest.name %}" role="button"><button class="btn-primary">Register</button></a>
+            <a href="/contests/{{ contest.slug }}/register" role="button"><button class="btn-primary">Register</button></a>
         {% endif %}
     </div>
 

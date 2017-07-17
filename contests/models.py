@@ -5,16 +5,18 @@ from django.contrib import admin
 
 class Tag(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    description = models.CharField(max_length=512, blank=True)
+    slug = models.SlugField(max_length=25, unique=True)
+    description = models.TextField(blank=False)
 
     def __str__(self):
         return str(self.name)
 
 
 class Contest(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=25, unique=True)
-    description = models.TextField(blank=False)
+    initial_description = models.CharField(max_length=512, blank=False)
+    ongoing_description = models.CharField(max_length=512, blank=False)
     tags = models.ManyToManyField(Tag)
     creators = models.ManyToManyField(User)
 

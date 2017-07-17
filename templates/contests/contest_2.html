@@ -8,16 +8,21 @@
 
 {% block content %}
 
-
+    <div class="panel-heading">
+            <div style="border:3px solid; padding:20px;margin:20px;text-transform:uppercase;">
+        <div style="border:2px solid; padding:5px;margin:-16px;">
+        <h1>{{ contest.name }}</h1>
+        <p>{{ contest.ongoing_description|markdown }}</p>
+        <p>start time: {{ contest.start_time }} end time: {{ contest.end_time }}</p>
+    </div>
     <div class="panel panel-primary">
-        <div class="panel-heading">
             <h1>Challenges</h1>
         </div>
         <div class="panel-body">
             <div class="list-group">
                 {% paginate challenges %}
                 {% for challenge in challenges %}
-                    <a href="/challenges/{{ challenge.name }}" class="list-group-item">
+                    <a href="/challenges/{{ challenge.slug }}" class="list-group-item">
                         <h3 class="list-group-item-heading">
                             {% if challenge in user.userprofile.solved_challenges.all %}
                                 <span class="glyphicon glyphicon-star"></span>
