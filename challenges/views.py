@@ -67,7 +67,7 @@ def challenge(request, challenge_slug, contest_slug=None, messages=None):
     # If user opens challenges other than the ones in contest through contest tab
     # redirect them away from getting unnecessary score
     if is_in_contest:
-        if chal in contest.challenge_set.all():
+        if chal not in contest.challenge_set.all():
             return redirect('contests.views.contest_view', contest_slug=contest_slug, messages={
                 'warning': ['No challenge with slug - {}'.format(challenge_slug)]})
 

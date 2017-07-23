@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .models import Contest
 from results.models import ContestResult
 from challenges.views import challenge
+from questionnaire.views import question
 
 
 def index(request, messages=None):
@@ -42,8 +43,12 @@ def contest_view(request, contest_slug, messages=None):
             'contest': contest, 'challenges': challenges, 'messages':messages})
 
 
-def challenge_solve(request,contest_name, challenge_name):
-    return challenge(request, challenge_name, contest_name)
+def challenge_solve(request, contest_slug, challenge_slug):
+    return challenge(request, challenge_slug, contest_slug)
+
+
+def question_solve(request, contest_slug, quiz_slug, question_slug):
+    return question(request, question_slug, quiz_slug, contest_slug)
 
 
 def contest_register(request, contest_slug):
