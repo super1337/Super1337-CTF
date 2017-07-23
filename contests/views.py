@@ -60,14 +60,14 @@ def contest_register(request, contest_slug):
             'warning': ['No contest with slug - {}'.format(contest_slug)]})
     has_registered = check_registered_contests(request, contest)
     if not has_registered:
-        user_result = ContestResult.create(user, contest)
-        user_result.save()
+        contest_result = ContestResult.create(user, contest)
+        contest_result.save()
     return redirect('contests.views.contest_view', contst_slug=contest_slug)
 
 
 def check_registered_contests(request, contest):
     try:
-        result_object = ContestResult.objects.get(user=request.user.pk,contest=contest.pk)
+        contest_result = ContestResult.objects.get(user=request.user.pk,contest=contest.pk)
         has_registered = True
     except ContestResult.DoesNotExist:
         has_registered = False

@@ -61,13 +61,15 @@ class SimpleQuestion(Question):
 
 class MCQ(Question):
     choices = models.CharField(choices=[], max_length=256)
-    correct = models.IntegerField()
+    answer = models.IntegerField()
+    # answer = models.CharField(max_length=256)
     is_mcq = models.BooleanField(default=True, editable=False)
 
     @classmethod
     def create(cls, question, slug, hints, choices, correct, score, quiz):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
-        mcq = cls(question=question, slug=slug, hints=hints, choices=CHOICES, correct=correct, score=score, quiz=quiz)
+        # answer = CHOICES[correct]
+        mcq = cls(question=question, slug=slug, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score, quiz=quiz)
         return mcq
 
 

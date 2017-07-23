@@ -9,8 +9,16 @@ class QuizResult(models.Model):
     user = models.ForeignKey(User)
     quiz = models.ForeignKey(Quiz)
     contest = models.ForeignKey(Contest, null=True, blank=True)
-    correct_question = models.ManyToManyField(SimpleQuestion, blank=True)
+    correct_questions = models.ManyToManyField(SimpleQuestion, blank=True)
     score = models.IntegerField(default=0)
+
+    @classmethod
+    def create(cls, user, quiz, contest=None):
+        if contest is None:
+            quiz_result = cls(user=user, quiz=quiz)
+        else:
+            quiz_result = cls(user=user, quiz=quiz, contest=contest)
+        return quiz_result
 
 
 # User result in this model.py file causes no problem and makes most sense
@@ -25,7 +33,7 @@ class ContestResult(models.Model):
     # have to make many to many field to challenges limited to the one present in the contest
     # passing query object(model challenge contest pk should be equal to pk of contest here) to limit_choices_to
     solved_challenge = models.ManyToManyField(Challenge, blank=True)
-    quiz_results = models.ManyToManyField(QuizResult)
+    quiz_results = models.ManyToManyField(QuizResult, blank=True)
     challenge_score = models.IntegerField(default=0)
 
     @classmethod
