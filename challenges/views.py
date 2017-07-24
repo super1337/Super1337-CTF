@@ -9,17 +9,17 @@ from contests.models import Contest
 
 def index(request):
     messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
-    tagname = request.GET.get('tag')
+    tag_name = request.GET.get('tag')
 
     sort = request.GET.get('sort')
     if sort not in ['name', 'modified', 'created', 'score']:
         sort = 'created'
 
-    if tagname:
+    if tag_name:
         try:
-            tag = Tag.objects.get(name=tagname)
+            tag = Tag.objects.get(name=tag_name)
         except ObjectDoesNotExist:
-            messages['info'].append('Tag {} does not exist! Showing all challenges instead.'.format(tagname))
+            messages['info'].append('Tag {} does not exist! Showing all challenges instead.'.format(tag_name))
             challenges = Challenge.objects.all().order_by(sort)
         else:
             challenges = tag.challenge_set.all().filter(hidden=False).order_by(sort)
@@ -44,7 +44,8 @@ def challenge(request, challenge_slug, contest_slug=None, messages=None):
         try:
             contest = Contest.objects.get(slug=contest_slug)
         except Contest.DoesNotExist:
-            return redirect('contests.views.index', messages={'warning': ['No contest with slug - {}'.format(contest_slug)]})
+            return redirect('contests.views.index',
+                            messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
     else:
         is_in_contest = False
 
@@ -53,23 +54,23 @@ def challenge(request, challenge_slug, contest_slug=None, messages=None):
         chal = Challenge.objects.get(slug=challenge_slug)
     except Challenge.DoesNotExist:
         if is_in_contest:
-            return redirect('contests.views.contest_view', contest_slug=contest_slug, messages={
-                'warning': ['No challenge with slug - {}'.format(contest_slug)]})
+            return redirect('contests.views.contest_view', contest_slug=contest_slug,
+                            messages=messages['warning'].append('No challenge with slug - {}'.format(contest_slug)))
         else:
-            return redirect('challenges.views.index', messages={
-                'warning': ['No challenge with slug - {}'.format(challenge_slug)]})
+            return redirect('challenges.views.index',
+                            messages=messages['warning'].append('No challenge with slug - {}'.format(challenge_slug)))
 
     # Makes challenge inaccessible out of contest even when user try with url manipulation
     if chal.hidden and (not is_in_contest):
-        return redirect('challenges.views.index', messages={
-            'warning': ['No challenge with slug - {}'.format(challenge_slug)]})
+        return redirect('challenges.views.index',
+                        messages=messages['warning'].append('No challenge with slug - {}'.format(challenge_slug)))
 
     # If user opens challenges other than the ones in contest through contest tab
     # redirect them away from getting unnecessary score
     if is_in_contest:
         if chal not in contest.challenge_set.all():
-            return redirect('contests.views.contest_view', contest_slug=contest_slug, messages={
-                'warning': ['No challenge with slug - {}'.format(challenge_slug)]})
+            return redirect('contests.views.contest_view', contest_slug=contest_slug,
+                            messages=messages['warning'].append('No challenge with slug - {}'.format(challenge_slug)))
 
     # main challenge checking code
     # makes necessary changes to user challenge and ContestResult objects

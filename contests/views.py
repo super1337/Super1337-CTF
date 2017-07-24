@@ -26,8 +26,8 @@ def contest_view(request, contest_slug, messages=None):
     try:
         contest = Contest.objects.get(slug=contest_slug)
     except Contest.DoesNotExist:
-        return redirect('contests.views.index', messages={
-            'warning': ['No contest with slug - {}'.format(contest_slug)]})
+        return redirect('contests.views.index',
+                        messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
 
     if contest.state == '1':
         has_registered = check_registered_contests(request, contest)
@@ -51,13 +51,16 @@ def question_solve(request, contest_slug, quiz_slug, question_slug):
     return question(request, question_slug, quiz_slug, contest_slug)
 
 
-def contest_register(request, contest_slug):
+def contest_register(request, contest_slug, messages=None):
     user = request.user
+    if messages is not None:
+        messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+
     try:
         contest = Contest.objects.get(slug=contest_slug)
     except Contest.DoesNotExist:
-        return redirect('contests.views.index', messages={
-            'warning': ['No contest with slug - {}'.format(contest_slug)]})
+        return redirect('contests.views.index',
+                        messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
     has_registered = check_registered_contests(request, contest)
     if not has_registered:
         contest_result = ContestResult.create(user, contest)

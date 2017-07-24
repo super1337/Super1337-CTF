@@ -31,7 +31,7 @@ def quiz(request, quiz_slug, contest_slug, messages=None):
             contest = Contest.objects.get(slug=contest_slug)
         except Contest.DoesNotExist:
             return redirect('contests.views.index',
-                            messages={'warning': ['No contest with slug - {}'.format(contest_slug)]})
+                            messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
     else:
         is_in_contest = False
 
@@ -54,7 +54,7 @@ def quiz(request, quiz_slug, contest_slug, messages=None):
         return redirect('questionnaire.views.index', messages={
             'warning': ['No quiz with slug - {}'.format(quiz_slug)]})
 
-    return render(request, 'questionnaire/quiz.html', {'quiz': quiz, 'questions': questions, 'messages': messages})
+    return render(request, 'questionnaire/question.html', {'quiz': quiz, 'questions': questions, 'messages': messages})
 
 
 def question(request, question_slug, quiz_slug, contest_slug=None, messages=None):
@@ -68,7 +68,7 @@ def question(request, question_slug, quiz_slug, contest_slug=None, messages=None
                 contest = Contest.objects.get(slug=contest_slug)
             except Contest.DoesNotExist:
                 return redirect('contests.views.index',
-                                messages={'warning': ['No contest with slug - {}'.format(contest_slug)]})
+                                messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
         else:
             is_in_contest = False
 
@@ -76,37 +76,37 @@ def question(request, question_slug, quiz_slug, contest_slug=None, messages=None
         ques = Question.objects.get(slug=question_slug)
     except Question.DoesNotExist:
         if is_in_contest:
-            return redirect('questionnaire.views.quiz', contest_slug=contest_slug, quiz_slug=quiz_slug, messages={
-                'warning': ['No question with slug - {}'.format(question_slug)]})
+            return redirect('questionnaire.views.quiz', contest_slug=contest_slug, quiz_slug=quiz_slug,
+                            messages=messages['warning'].append('No question with slug - {}'.format(question_slug)))
         else:
-            return redirect('questionnaire.views.index', messages={
-                'warning': ['No question with slug - {}'.format(question_slug)]})
+            return redirect('questionnaire.views.index',
+                            messages=messages['warning'].append('No question with slug - {}'.format(question_slug)))
 
     # Get challenge or redirect according to in contest or challenge tab
     try:
         quiz_obj = Quiz.objects.get(slug=quiz_slug)
     except Quiz.DoesNotExist:
         if is_in_contest:
-            return redirect('contests.views.contest_view', contest_slug=contest_slug, messages={
-                'warning': ['No quiz with slug - {}'.format(quiz_slug)]})
+            return redirect('contests.views.contest_view', contest_slug=contest_slug,
+                            messages=messages['warning'].append('No quiz with slug - {}'.format(quiz_slug)))
         else:
-            return redirect('questionnaire.views.index', messages={
-                'warning': ['No quiz with slug - {}'.format(quiz_slug)]})
+            return redirect('questionnaire.views.index',
+                            messages=messages['warning'].append('No quiz with slug - {}'.format(quiz_slug)))
 
     # Makes challenge inaccessible out of contest even when user try with url manipulation
     if quiz.hidden and (not is_in_contest):
-        return redirect('questionnaire.views.index', messages={
-            'warning': ['No quiz with slug - {}'.format(quiz_slug)]})
+        return redirect('questionnaire.views.index',
+                        messages=messages['warning'].append('No quiz with slug - {}'.format(quiz_slug)))
 
     # If user opens challenges other than the ones in contest through contest tab
     # redirect them away from getting unnecessary score
     if is_in_contest:
         if quiz_obj not in contest.quiz_set.all():
-            return redirect('contests.views.contest_view', contest_slug=contest_slug, messages={
-                'warning': ['No quiz with slug - {}'.format(quiz_slug)]})
+            return redirect('contests.views.contest_view', contest_slug=contest_slug,
+                            messages=messages['warning'].append('No quiz with slug - {}'.format(quiz_slug)))
         if ques not in quiz_obj.question_set.all():
-            return redirect('contests.views.quiz', contest_slug=contest_slug, quiz_slug=quiz_slug, messages={
-                'warning': ['No question with slug - {}'.format(quiz_slug)]})
+            return redirect('contests.views.quiz', contest_slug=contest_slug, quiz_slug=quiz_slug,
+                            messages=messages['warning'].append('No question with slug - {}'.format(quiz_slug)))
 
     # set form
     if ques.is_mcq:
