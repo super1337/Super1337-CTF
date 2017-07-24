@@ -66,6 +66,13 @@ def question(request, question_slug, quiz_slug, contest_slug=None, messages=None
             is_in_contest = True
             try:
                 contest = Contest.objects.get(slug=contest_slug)
+                if contest.state == '1':
+                    redirect('contests.views.index',
+                             messages=messages['info'].append('The Contest has not started yet.'))
+                if contest.state == '3':
+                    redirect('contests.views.index',
+                             messages=messages['info'].append('The Contest has ended go to challenges tab ' +
+                                                              'or contest\'s main page'))
             except Contest.DoesNotExist:
                 return redirect('contests.views.index',
                                 messages=messages['warning'].append('No contest with slug - {}'.format(contest_slug)))
