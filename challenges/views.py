@@ -7,8 +7,9 @@ from results.models import ContestResult
 from contests.models import Contest
 
 
-def index(request):
-    messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
+def index(request, messages=None):
+    if messages is not None:
+        messages = {'success': [], 'info': [], 'warning': [], 'danger': []}
     tag_name = request.GET.get('tag')
 
     sort = request.GET.get('sort')
