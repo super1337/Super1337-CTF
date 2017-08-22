@@ -122,18 +122,13 @@
     </div>
 
     <div class="container">
-        <!-- Messages or alerts shown as bootstrap alerts -->
+        <!-- In-built Django Messages -->
         {% if messages %}
-            {% for type, alerts in messages.items %}
-                {% for alert in alerts %}
-                    <div class="alert alert-{{ type }} alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <strong>{{ type.title }}!</strong>
-                        {{ alert }}
-                    </div>
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
                 {% endfor %}
-            {% endfor %}
+            </ul>
         {% endif %}
 
 
