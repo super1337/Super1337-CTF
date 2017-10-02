@@ -4,9 +4,6 @@ from django.contrib import admin
 
 from contests.models import Contest, Tag
 
-# signal handlers
-from django.dispatch import receiver
-
 
 class Quiz(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -42,14 +39,6 @@ class Question(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    # def save(self, *args, **kwargs):
-    #     '''On save, update timestamps '''
-    #
-    #     if not self.id:
-    #         self.created = timezone.now()
-    #     self.modified = timezone.now()
-    #     return super(Question, self).save(*args, **kwargs)
-
     def __str__(self):
         return str(self.slug)
 
@@ -62,13 +51,11 @@ class SimpleQuestion(Question):
 class MCQ(Question):
     choices = models.CharField(choices=[], max_length=256)
     answer = models.IntegerField()
-    # answer = models.CharField(max_length=256)
     is_mcq = models.BooleanField(default=True, editable=False)
 
     @classmethod
     def create(cls, question, slug, hints, choices, correct, score, quiz):
         CHOICES = [(index, item) for index, item in enumerate(choices)]
-        # answer = CHOICES[correct]
         mcq = cls(question=question, slug=slug, hints=hints, choices=CHOICES, correct=correct, answer=answer, score=score, quiz=quiz)
         return mcq
 
