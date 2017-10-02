@@ -3,15 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=16, unique=True)
-    description = models.TextField(blank=False)
-
-    def __str__(self):
-        return str(self.name)
-
-
 class Contest(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=16, unique=True)
@@ -39,9 +30,3 @@ class ContestAdmin(admin.ModelAdmin):
     # readonly_fields = ('state',)
     list_filter = ('tags', 'state', 'created', 'creators')
     ordering = ['name', 'start_time', 'end_time', 'modified', 'created', 'state']
-
-
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description')
-    search_fields = ('name', 'description')
-    ordering = ['name']
