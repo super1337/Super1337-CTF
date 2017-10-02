@@ -1,4 +1,4 @@
-{% extends 'challenges/base.html' %}
+{% extends 'tags/base.html' %}
 {% load el_pagination_tags %}
 
 {% block title %}
@@ -15,7 +15,7 @@
             <div class="list-group">
                 {% paginate tags %}
                 {% for tag in tags %}
-                    <a href="/challenges/?tag={{ tag.name }}" class="list-group-item">
+                    <a href="/challenges?tag={{ tag.name }}" class="list-group-item">
                         <h4 class="list-group-item-heading">
                             <span class="glyphicon glyphicon-tags"></span>
                             {{ tag.name }}
