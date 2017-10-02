@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
+from tags.models import Tag
 
 
 class Contest(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=16, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
     initial_description = models.CharField(max_length=512, blank=False)
     ongoing_description = models.CharField(max_length=512, blank=False)
     tags = models.ManyToManyField(Tag)
@@ -27,6 +28,6 @@ class ContestAdmin(admin.ModelAdmin):
     list_display = ('name', 'start_time', 'end_time', 'modified', 'created', 'state')
     search_fields = ('name', )
     raw_id_fields = ('creators',)
-    # readonly_fields = ('state',)
     list_filter = ('tags', 'state', 'created', 'creators')
     ordering = ['name', 'start_time', 'end_time', 'modified', 'created', 'state']
+    prepopulated_fields = {'slug': ('name', 'initial_description')}
