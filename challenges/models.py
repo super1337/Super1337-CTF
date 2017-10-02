@@ -3,13 +3,14 @@ import os
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
-from contests.models import Contest, Tag
+from contests.models import Contest
+from tags.models import Tag
 
 
 class Challenge(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    slug = models.SlugField(max_length=16, unique=True)
     problem = models.CharField(max_length=256)
+    slug = models.SlugField(max_length=512, unique=True)
     hints = models.CharField(max_length=256, blank=True)
     flag = models.CharField(max_length=256)
     file = models.FileField(upload_to='challenges/', blank=True)
@@ -27,14 +28,6 @@ class Challenge(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
-    # def save(self, *args, **kwargs):
-    #     '''On save, update timestamps '''
-    #
-    #     if not self.id:
-    #         self.created = timezone.now()
-    #     self.modified = timezone.now()
-    #     return super(Challenge, self).save(*args, **kwargs)
-
     def filename(self):
         return os.path.basename(self.file.name)
 
@@ -49,3 +42,4 @@ class ChallengeAdmin(admin.ModelAdmin):
     readonly_fields = ('solve_count',)
     list_filter = ('tags', 'score', 'modified', 'created', 'creators', 'difficulty')
     ordering = ['name', 'score', 'creators', 'modified', 'created', 'difficulty']
+    prepopulated_fields = {'slug' : ('name', 'problem')}
