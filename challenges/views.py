@@ -4,14 +4,15 @@ from django.contrib import messages
 
 from results.models import ContestResult
 from contests.models import Contest
+from tags.models import Tag
 from .forms import FlagForm
-from .models import Challenge, Tag
+from .models import Challenge
 
 
 def index(request):
     tag_name = request.GET.get('tag')
-
     sort = request.GET.get('sort')
+
     if sort not in ['name', 'modified', 'created', 'score']:
         sort = 'created'
 
@@ -19,8 +20,8 @@ def index(request):
         try:
             tag = Tag.objects.get(name=tag_name)
         except ObjectDoesNotExist:
-            messages.info('Tag {} does not exist! Showing all challenges instead.'.format(tag_name))
-            challenges = Challenge.objects.all().order_by(sort)
+            messages.info(request, 'Tag {} does not exist! Showing all challenges instead.'.format(tag_name))
+            challenges = Challenge.objects.all().filter(hidden=False).order_by(sort)
         else:
             challenges = tag.challenge_set.all().filter(hidden=False).order_by(sort)
     else:
@@ -29,54 +30,50 @@ def index(request):
     return render(request, 'challenges/index.html', {'challenges': challenges})
 
 
-def tags(request):
-    tags = Tag.objects.all()
-    return render(request, 'challenges/tags.html', {'tags': tags})
-
-
 def challenge(request, challenge_slug, contest_slug=None):
-    # Get contest object or redirect to contests.views.index
+
+    # Get contest object if it's given and a valid one. Otherwise continue or redirect to contest.views.index.
     if contest_slug is not None:
         is_in_contest = True
         try:
             contest = Contest.objects.get(slug=contest_slug)
             if contest.state == '1':
-                messages.info('The Contest has not started yet.')
+                messages.info(request, 'The Contest has not started yet.')
                 redirect('contests.views.index')
             if contest.state == '3':
-                messages.info('The Contest has ended go to challenges tab or contest\'s main page')
+                messages.info(request, 'The Contest has ended go to challenges tab or contest\'s main page')
                 redirect('contests.views.index')
         except Contest.DoesNotExist:
-            messages.warning('No contest with slug - {}'.format(contest_slug))
+            messages.warning(request, 'No contest with slug - {}'.format(contest_slug))
             return redirect('contests.views.index')
     else:
         is_in_contest = False
 
-    # Get challenge or redirect according to in contest or challenge tab
+    # Get challenge or redirect according to in contest or challenge tab.
     try:
         chal = Challenge.objects.get(slug=challenge_slug)
     except Challenge.DoesNotExist:
         if is_in_contest:
-            messages.warning('No challenge with slug - {}'.format(contest_slug))
+            messages.warning(request, 'No challenge with slug - {}'.format(contest_slug))
             return redirect('contests.views.contest_view', contest_slug=contest_slug)
         else:
-            messages.warning('No challenge with slug - {}'.format(challenge_slug))
+            messages.warning(request, 'No challenge with slug - {}'.format(challenge_slug))
             return redirect('challenges.views.index')
 
     # Makes challenge inaccessible out of contest even when user try with url manipulation
     if chal.hidden and (not is_in_contest):
-        messages.warning('No challenge with slug - {}'.format(challenge_slug))
+        messages.warning(request, 'No challenge with slug - {}'.format(challenge_slug))
         return redirect('challenges.views.index')
 
-    # If user opens challenges other than the ones in contest through contest tab
-    # redirect them away from getting unnecessary score
+    # If user opens challenges other than the ones in contest through contest tab, redirect them away from getting
+    # unnecessary or unintended score
     if is_in_contest:
         if chal not in contest.challenge_set.all():
-            messages.warning('No challenge with slug - {}'.format(challenge_slug))
+            messages.warning(request, 'No challenge with slug - {}'.format(challenge_slug))
             return redirect('contests.views.contest_view')
 
-    # main challenge checking code
-    # makes necessary changes to user challenge and ContestResult objects
+    # Main flag validating code for challenge.
+    # Makes necessary changes to user challenge and ContestResult objects
     if request.method == 'POST':
         if request.user.is_authenticated():
             form = FlagForm(request.POST)
@@ -97,11 +94,11 @@ def challenge(request, challenge_slug, contest_slug=None):
                                 contest_result.solved_challenges.add(chal)
                                 contest_result.score += chal.score
 
-                    messages.success('You did it! You solved the challenge successfully!')
+                    messages.success(request, 'You did it! You solved the challenge successfully!')
                 else:
-                    messages.info('Sorry! You got it wrong. Try harder')
+                    messages.info(request, 'Sorry! You got it wrong. Try harder')
         else:
-            messages.danger('You must be logged in to submit flags')
+            messages.danger(request, 'You must be logged in to submit flags')
             form = FlagForm()
         return render(request, 'challenges/challenge.html', {'challenge': chal, 'form': form})
 
