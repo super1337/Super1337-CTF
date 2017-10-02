@@ -9,7 +9,7 @@ from questionnaire.views import question
 
 def index(request):
     contests = Contest.objects.all()
-    # may be make this client side by filtering state in templates
+
     yet_to_begin = contests.filter(state='1')
     ongoing = contests.filter(state='2')
     ended = contests.filter(state='3')
@@ -63,7 +63,7 @@ def contest_register(request, contest_slug):
 
 def check_registered_contests(request, contest):
     try:
-        contest_result = ContestResult.objects.get(user=request.user.pk,contest=contest.pk)
+        ContestResult.objects.get(user=request.user.pk,contest=contest.pk)
         has_registered = True
     except ContestResult.DoesNotExist:
         has_registered = False

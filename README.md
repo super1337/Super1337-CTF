@@ -7,15 +7,6 @@
 3. Install _requirements_: `pip3 install -r requirements.txt`
 4. Run the server: `python3 manage.py runserver`
 
-## Credentials
-
-Admin credentials are
-- _username_ - `iitdelhi`
-- _password_ - `superleetctf`
-
-## Troubleshoot
-
-- For Those migrating from `python2.x` to `python3.x`, make sure to install the _requirements_ by following `step 4` of above.
 
 # Project Description
 

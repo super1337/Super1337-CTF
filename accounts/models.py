@@ -24,14 +24,11 @@ class UserProfile(models.Model):
         score = 0
         for chal in self.solved_challenges.all():
             score = score + chal.score
-        # for ques in self.solved_questions.all():
-        #     score = score + ques.score
 
         return score
 
     def save(self, *args, **kwargs):
         """ On save, update score """
-
         if not self.id:
             self.score = 0
         else:
