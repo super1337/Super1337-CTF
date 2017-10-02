@@ -27,8 +27,7 @@ urlpatterns = [
     url(r'^contests/', include('contests.urls')),
     url(r'^questionnaire/', include('questionnaire.urls')),
     url(r'^challenges/', include('challenges.urls')),
+    url(r'^tags/', include('tags.urls')),
 
-    # url(r'^$', views.index, name='index'),
-    url(r'^timer', views.timer, name='timer'),
     url(r'^$', TemplateView.as_view(template_name='superleetctf/index.html'))
 ]
