@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'challenges',
     'contests',
     'results'
-    # 'countdown'
 ]
 
 MIDDLEWARE = [
